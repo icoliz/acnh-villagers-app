@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en-GBs">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Animal Crossing New Horizons villager application"
+    />
+    <title>ACNH Villagers</title>
+  </head>
+  <body>
+    <acnh-app></acnh-app>
+    <script type="module">
+      import { AcnhApp } from './src/acnh-app/AcnhApp.js';
+      window.customElements.define('acnh-app', AcnhApp);
+    </script>
+  </body>
+</html>

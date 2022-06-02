@@ -1,0 +1,27 @@
+{
+  "name": "acnh-villagers-app",
+  "version": "1.0.0",
+  "description": "animal crossing villagers application",
+  "main": "index.js",
+  "dependencies": {
+    "@open-wc/scoped-elements": "^2.0.0-next.6",
+    "lit-element": "^3.2.0"
+  },
+  "devDependencies": {
+    "@web/dev-server": "^0.1.31"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "web-dev-server --node-resolve --open --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/icoliz/acnh-villagers-app.git"
+  },
+  "author": "Ico",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/icoliz/acnh-villagers-app/issues"
+  },
+  "homepage": "https://github.com/icoliz/acnh-villagers-app#readme"
+}
