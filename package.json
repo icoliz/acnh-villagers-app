@@ -4,15 +4,25 @@
   "description": "animal crossing villagers application",
   "main": "index.js",
   "dependencies": {
+    "@lion/localize": "^0.25.0",
     "@open-wc/scoped-elements": "^2.0.0-next.6",
+    "@web/test-runner-visual-regression": "^0.6.5",
     "lit-element": "^3.2.0"
   },
   "devDependencies": {
-    "@web/dev-server": "^0.1.31"
+    "@esm-bundle/chai": "^4.3.4-fix.0",
+    "@open-wc/testing": "^3.0.0-next.5",
+    "@web/dev-server": "^0.1.31",
+    "@web/dev-server-storybook": "^0.5.1",
+    "@web/test-runner": "^0.13.29"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "web-dev-server --node-resolve --open --watch"
+    "start": "web-dev-server --node-resolve --open --watch",
+    "storybook": "wds --config .web-server-storybook/web-server-storybook.config.mjs",
+    "test": "web-test-runner ./src/**/test/*test.js --node-resolve",
+    "test:watch": "web-test-runner ./src/**/test/*test.js --node-resolve --watch --coverage",
+    "test:visual": "web-test-runner --config .web-test-runner/web-test-runner.config.mjs",
+    "test:visual-update": "web-test-runner --config .web-test-runner/web-test-runner.config.mjs --update-visual-baseline"
   },
   "repository": {
     "type": "git",
