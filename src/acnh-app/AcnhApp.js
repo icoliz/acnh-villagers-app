@@ -2,40 +2,52 @@ import { LitElement, html } from 'lit-element';
 import { ScopedElementsMixin } from '@open-wc/scoped-elements';
 
 import { styles } from './AcnhApp.styles.js';
-import { callToApi } from '../services/callToApi.js';
-import { VillagersList } from '../villagers/VillagersList.js';
-
-callToApi();
+import { getVillagers } from '../services/getVillagers.js';
+import { AcnhHeader } from '../acnh-header/AcnhHeader.js';
+import { VillagersList } from '../villagers-list/VillagersList.js';
+import { AcnhFooter } from '../acnh-footer/AcnhFooter.js';
 
 export class AcnhApp extends ScopedElementsMixin(LitElement) {
+  connectedCallback() {
+    super.connectedCallback();
+
+    getVillagers().then((result) => {
+      this.villagers = result;
+    });
+  }
+
   static get scopedElements() {
-    return { 'villagers-list': VillagersList };
+    return {
+      'villagers-list': VillagersList,
+      'acnh-header': AcnhHeader,
+      'acnh-footer': AcnhFooter,
+    };
   }
 
   static get styles() {
     return styles;
   }
 
+  static get properties() {
+    return {
+      villagers: { type: Array },
+    };
+  }
+
+  constructor() {
+    super();
+
+    this.villagers = [];
+  }
+
   render() {
     return html`
-      <header class="header">
-        <h1>Animal Crossing Villagers</h1>
-        <nav>
-          <ul>
-            <li>Home</li>
-            <li>My villagers</li>
-            <li>Villagers wishlist</li>
-          </ul>
-        </nav>
-      </header>
+      <acnh-header></acnh-header>
       <main class="main">
         <h2>Villagers information</h2>
-        <villagers-list></villagers-list>
-        <!-- VillagersList component -->
+        <villagers-list .villagers=${this.villagers}></villagers-list>
       </main>
-      <footer class="footer">
-        <p>&copy; 2022 <a href="#">Ico Lizhen</a></p>
-      </footer>
+      <acnh-footer></acnh-footer>
     `;
   }
 }

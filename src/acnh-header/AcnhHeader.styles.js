@@ -8,4 +8,7 @@ export const styles = css`
     box-sizing: border-box;
   }
   /* Styles */
+  .header {
+    background-color: pink;
+  }
 `;

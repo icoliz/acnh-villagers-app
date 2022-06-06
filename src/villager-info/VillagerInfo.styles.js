@@ -7,8 +7,15 @@ export const styles = css`
     padding: 0;
     box-sizing: border-box;
   }
+
   /* Styles */
-  .main {
-    background-color: lightblue;
+  .villager {
+    width: 100px;
+    margin: 10px;
+  }
+
+  .villager__img {
+    width: 100px;
+    background-color: grey;
   }
 `;

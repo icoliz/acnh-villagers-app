@@ -8,7 +8,7 @@ export const styles = css`
     box-sizing: border-box;
   }
   /* Styles */
-  .main {
-    background-color: lightblue;
+  .footer {
+    background-color: #eee8aa;
   }
 `;

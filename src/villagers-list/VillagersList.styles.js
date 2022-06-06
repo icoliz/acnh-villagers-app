@@ -8,7 +8,12 @@ export const styles = css`
     box-sizing: border-box;
   }
   /* Styles */
-  .main {
-    background-color: lightblue;
+  .villagers {
+    list-style-type: none;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
   }
 `;

@@ -1,0 +1,36 @@
+import { LitElement, html } from 'lit-element';
+
+import { styles } from './VillagerInfo.styles.js';
+
+export class VillagerInfo extends LitElement {
+  static get styles() {
+    return styles;
+  }
+
+  static get properties() {
+    return {
+      villager: { type: Object },
+    };
+  }
+
+  constructor() {
+    super();
+
+    this.villager = {};
+  }
+
+  render() {
+    return html`
+      <li class="villager">
+        <h3>${this.villager.nameEN}</h3>
+        <img
+          class="villager__img"
+          src="${this.villager.image}"
+          alt="Picture of ${this.villager.nameEN}"
+        />
+        <p>${this.villager.species}</p>
+        <p>Personality: ${this.villager.personality}</p>
+      </li>
+    `;
+  }
+}
