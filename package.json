@@ -4,6 +4,7 @@
   "description": "animal crossing villagers application",
   "main": "index.js",
   "dependencies": {
+    "@lion/ajax": "^0.16.0",
     "@lion/button": "^0.18.0",
     "@lion/input": "^0.18.0",
     "@lion/localize": "^0.25.0",
