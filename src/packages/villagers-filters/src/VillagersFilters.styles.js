@@ -6,12 +6,7 @@ export const styles = css`
     box-sizing: border-box;
   }
   /* Styles */
-  .villagers {
-    list-style-type: none;
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
+  .form {
+    background-color: #eee8aa;
   }
 `;
