@@ -1,7 +1,7 @@
 import { html } from 'lit-element';
 
-import { VillagersList } from '../VillagersList.js';
-import { getVillagers } from '../../services/getVillagers.js';
+import { VillagersList } from '../src/VillagersList.js';
+import { getVillagers } from '../../../services/getVillagers.js';
 
 window.customElements.define('villagers-list', VillagersList);
 

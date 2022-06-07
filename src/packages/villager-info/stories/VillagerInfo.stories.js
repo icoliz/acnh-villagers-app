@@ -1,10 +1,10 @@
 import { html } from 'lit-element';
 
-import { VillagerInfo } from '../VillagerInfo.js';
+import { VillagerInfo } from '../src/VillagerInfo.js';
 window.customElements.define('villager-info', VillagerInfo);
 
 export default {
   title: 'VillagerInfo',
 };
 
-export const VillagerInfo = () => html`<villager-info></villager-info>`;
+export const VillagerInfoStory = () => html`<villager-info></villager-info>`;
