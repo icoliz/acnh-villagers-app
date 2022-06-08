@@ -100,6 +100,7 @@ export class AcnhApp extends router(ScopedElementsMixin(LitElement)) {
           .villagers=${this.villagers}
           route="home"
         ></villagers-list>
+        <p route="my-villagers">Hello</p>
       </acnh-main>
       <acnh-footer></acnh-footer>
     `;
