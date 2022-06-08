@@ -22,7 +22,7 @@
     "@web/test-runner-visual-regression": "^0.6.5"
   },
   "scripts": {
-    "start": "web-dev-server --node-resolve --open --watch",
+    "start": "web-dev-server --node-resolve --app-index index.html --open --watch",
     "storybook": "wds --config .web-server-storybook/web-server-storybook.config.mjs",
     "test": "web-test-runner ./src/packages/**/test/*.test.js --node-resolve",
     "test:watch": "web-test-runner ./src/packages/**/test/*.test.js --node-resolve --watch --coverage",
