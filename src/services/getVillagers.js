@@ -26,6 +26,8 @@ export const getVillagers = async () => {
     };
 
     const villagers = mapApiData(dataApiArray);
+
+    console.log(villagers[0]);
     return villagers;
   } catch (error) {
     return null;

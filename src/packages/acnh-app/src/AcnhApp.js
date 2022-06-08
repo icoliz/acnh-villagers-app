@@ -44,8 +44,12 @@ export class AcnhApp extends router(ScopedElementsMixin(LitElement)) {
         data: { title: 'Home' },
       },
       {
-        name: 'info',
-        pattern: 'info',
+        name: 'my-villagers',
+        pattern: 'my-villagers',
+      },
+      {
+        name: 'wishlist',
+        pattern: 'wishlist',
       },
     ];
   }
@@ -79,17 +83,23 @@ export class AcnhApp extends router(ScopedElementsMixin(LitElement)) {
 
   render() {
     console.log(this.route);
-
     return html`
-      <app-link href="/">Home</app-link>
-      <app-link href="/info">Villagers Info</app-link>
+      <!-- <p route="home">All villagers</p>
+      <p route="my-villagers">My villagers</p>
+      <p route="wishlist">Wishlist</p> -->
 
-      <acnh-header> </acnh-header>
+      <acnh-header .route=${this.route}> </acnh-header>
       <h2>Villagers information</h2>
-      <!-- TODO: fix router issues: doesn't take the current route-->
-      <acnh-main .villagers=${this.villagers}>
-        <p route="home">Home</p>
-        <p route="info">Info ${this.query.data}</p>
+      <!-- TODO: fix router issues: isn't getting active-route-->
+      <acnh-main .villagers=${this.villagers} active-route=${this.route}>
+        <villagers-filters
+          .villagers=${this.villagers}
+          route="wishlist"
+        ></villagers-filters>
+        <villagers-list
+          .villagers=${this.villagers}
+          route="home"
+        ></villagers-list>
       </acnh-main>
       <acnh-footer></acnh-footer>
     `;

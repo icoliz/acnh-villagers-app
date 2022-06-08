@@ -32,8 +32,11 @@ export class AcnhMain extends outlet(ScopedElementsMixin(LitElement)) {
 
   render() {
     return html`
-      <villagers-filters .villagers=${this.villagers}></villagers-filters>
-      <villagers-list .villagers=${this.villagers}></villagers-list>
+      <slot>
+        <!-- <villagers-filters .villagers=${this
+          .villagers}></villagers-filters>
+        <villagers-list .villagers=${this.villagers}></villagers-list> -->
+      </slot>
     `;
   }
 }

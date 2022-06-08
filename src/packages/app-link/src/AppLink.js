@@ -22,7 +22,7 @@ export class Link extends navigator(ScopedElementsMixin(LitElement)) {
 
   render() {
     return html`
-      <a href=${this.href} @click=${this.onClickLink}> <slot> </slot></a>
+      <a href=${this.href} @click=${this.onClickLink}><slot> </slot></a>
     `;
   }
 }

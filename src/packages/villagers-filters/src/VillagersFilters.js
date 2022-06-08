@@ -38,7 +38,7 @@ export class VillagersFilters extends ScopedElementsMixin(LitElement) {
       <form class="form">
         <lion-input></lion-input>
         <lion-button>Button</lion-button>
-        <lion-select-rich name="villager-species" label="villager-species">
+        <lion-select-rich name="villager-species" label="Villager Species">
           <lion-options slot="input" @change=${this.handleChange}>
             <lion-option .choiceValue=${'Anteater'}>Anteater</lion-option>
             <lion-option .choiceValue=${'Bear'}>Bear</lion-option>
