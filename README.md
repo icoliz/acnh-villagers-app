@@ -4,6 +4,21 @@ An application to look up and store data about Animal Crossing New Horizons vill
 
 This application will show information about the villagers in ACNH. The information will be extracted from the free [Animal Crossing New Horizons API](http://acnhapi.com/).
 
+**How to start the project**
+How to start the project:
+
+Once you have downloaded/cloned the repository, you need to install the dependencies running the command
+
+```bash
+npm install
+```
+
+To see it in your browser, run
+
+```bash
+npm start
+```
+
 **Functionality**
 A list of the villagers with their relevant information will be displayed.
 

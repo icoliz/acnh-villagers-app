@@ -12,15 +12,6 @@ import { AcnhFooter } from '../../acnh-footer/index.js';
 import { Link } from '../../app-link/index.js';
 
 export class AcnhApp extends router(ScopedElementsMixin(LitElement)) {
-  connectedCallback() {
-    super.connectedCallback();
-
-    // TODO: change to use async await
-    getVillagers().then((result) => {
-      this.villagers = result;
-    });
-  }
-
   static get scopedElements() {
     return {
       'acnh-header': AcnhHeader,
@@ -58,9 +49,6 @@ export class AcnhApp extends router(ScopedElementsMixin(LitElement)) {
     return {
       villagers: { type: Array },
       route: { type: String },
-      params: { type: Object },
-      query: { type: Object },
-      data: { type: Object },
     };
   }
 
@@ -69,26 +57,23 @@ export class AcnhApp extends router(ScopedElementsMixin(LitElement)) {
 
     this.villagers = [];
     this.route = '';
-    this.params = {};
-    this.query = {};
-    this.data = {};
   }
 
-  router(route, params, query, data) {
+  connectedCallback() {
+    super.connectedCallback();
+
+    getVillagers().then((result) => {
+      this.villagers = result;
+    });
+  }
+
+  router(route) {
     this.route = route;
-    this.params = params;
-    this.query = query;
-    this.data = data;
   }
 
   render() {
-    console.log(this.route);
     return html`
-      <!-- <p route="home">All villagers</p>
-      <p route="my-villagers">My villagers</p>
-      <p route="wishlist">Wishlist</p> -->
-
-      <acnh-header .route=${this.route}> </acnh-header>
+      <acnh-header> </acnh-header>
       <h2>Villagers information</h2>
       <!-- TODO: fix router issues: isn't getting active-route-->
       <acnh-main .villagers=${this.villagers} active-route=${this.route}>

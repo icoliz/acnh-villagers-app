@@ -21,12 +21,6 @@ export class AcnhHeader extends ScopedElementsMixin(LitElement) {
     };
   }
 
-  constructor() {
-    super();
-
-    this.route = '';
-  }
-
   render() {
     return html`
       <header class="header">
