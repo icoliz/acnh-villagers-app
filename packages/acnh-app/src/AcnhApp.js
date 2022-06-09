@@ -48,8 +48,8 @@ export class AcnhApp extends router(ScopedElementsMixin(LitElement)) {
   static get properties() {
     return {
       villagers: { type: Array },
+      filteredVillagers: { type: Array },
       route: { type: String },
-      inputValue: { type: String },
     };
   }
 
@@ -57,8 +57,8 @@ export class AcnhApp extends router(ScopedElementsMixin(LitElement)) {
     super();
 
     this.villagers = [];
+    this.filteredVillagers = [];
     this.route = '';
-    this.inputValue = '';
   }
 
   connectedCallback() {
@@ -73,9 +73,18 @@ export class AcnhApp extends router(ScopedElementsMixin(LitElement)) {
     this.route = route;
   }
 
-  clickSearchButton(inputValue) {}
+  clickSearchButton(inputValue) {
+    const search = inputValue.detail.toLowerCase();
+
+    this.filteredVillagers = this.villagers.filter((villager) =>
+      villager.nameEN.toLowerCase().includes(search)
+    );
+
+    return this.filteredVillagers || this.villagers;
+  }
 
   render() {
+    console.log(this.filteredVillagers);
     return html`
       <acnh-header> </acnh-header>
       <h2>Villagers information</h2>
