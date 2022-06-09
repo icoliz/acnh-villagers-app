@@ -2,7 +2,7 @@ import { visualRegressionPlugin } from '@web/test-runner-visual-regression/plugi
 
 export default {
   nodeResolve: true,
-  files: ['./src/packages/**/test/*.visual.js'],
+  files: ['./packages/*/test/*.visual.js'],
   plugins: [
     visualRegressionPlugin({
       update: process.argv.includes('--update-visual-baseline'),

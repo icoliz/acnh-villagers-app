@@ -49,6 +49,7 @@ export class AcnhApp extends router(ScopedElementsMixin(LitElement)) {
     return {
       villagers: { type: Array },
       route: { type: String },
+      inputValue: { type: String },
     };
   }
 
@@ -57,6 +58,7 @@ export class AcnhApp extends router(ScopedElementsMixin(LitElement)) {
 
     this.villagers = [];
     this.route = '';
+    this.inputValue = '';
   }
 
   connectedCallback() {
@@ -71,15 +73,17 @@ export class AcnhApp extends router(ScopedElementsMixin(LitElement)) {
     this.route = route;
   }
 
+  clickSearchButton(inputValue) {}
+
   render() {
     return html`
       <acnh-header> </acnh-header>
       <h2>Villagers information</h2>
-      <!-- TODO: fix router issues: isn't getting active-route-->
-      <acnh-main .villagers=${this.villagers} active-route=${this.route}>
+      <acnh-main .activeRoute=${this.route}>
         <villagers-filters
           .villagers=${this.villagers}
-          route="wishlist"
+          @click-search-button=${this.clickSearchButton}
+          route="home"
         ></villagers-filters>
         <villagers-list
           .villagers=${this.villagers}

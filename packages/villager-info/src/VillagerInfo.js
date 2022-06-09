@@ -25,7 +25,8 @@ export class VillagerInfo extends LitElement {
         <h3>${this.villager.nameEN}</h3>
         <img
           class="villager__img"
-          src="${this.villager.image}"
+          src=${this.villager.image}
+          data-testid="villager-img"
           alt="Picture of ${this.villager.nameEN}"
         />
         <p>${this.villager.species}</p>

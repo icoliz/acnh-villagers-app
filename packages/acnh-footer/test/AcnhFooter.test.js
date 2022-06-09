@@ -8,6 +8,6 @@ describe('AcnhFooter', () => {
   it('should be accessible', async () => {
     const element = await scopedFixture(html`<acnh-footer></acnh-footer>`);
 
-    await expect(element).to.be.accessible;
+    await expect(element).to.be.accessible();
   });
 });
