@@ -1,4 +1,5 @@
 import { visualDiff } from '@web/test-runner-visual-regression';
+import { waitUntil } from '@open-wc/testing';
 import { VillagersList } from '../index.js';
 
 if (!customElements.get('villagers-list')) {
@@ -7,26 +8,26 @@ if (!customElements.get('villagers-list')) {
 
 const villagers = [
   {
-    birthday: '9/3',
-    birthday_string: 'March 9th',
+    birthday: '11/4',
+    birthday_string: 'April 11th',
     gender: 'Male',
-    icon: 'https://acnhapi.com/v1/icons/villagers/1',
-    id: 1,
-    image: 'https://acnhapi.com/v1/images/villagers/1',
-    nameCN: '阳明',
-    nameDE: 'Theo',
-    nameEN: 'Cyrano',
-    nameES: 'Cirano',
-    personality: 'Cranky',
-    species: 'Anteater',
+    icon: '/.web-test-runner/assets/img/punchy.png',
+    id: 48,
+    image: '/.web-test-runner/assets/img/punchy.png',
+    nameCN: '尔光',
+    nameDE: 'Julian',
+    nameEN: 'Punchy',
+    nameES: 'Félix',
+    personality: 'Lazy',
+    species: 'Cat',
   },
   {
     birthday: '17/3',
     birthday_string: 'March 17th',
     gender: 'Female',
-    icon: 'https://acnhapi.com/v1/icons/villagers/74',
+    icon: '/.web-test-runner/assets/img/cheri.png',
     id: 74,
-    image: 'https://acnhapi.com/v1/images/villagers/74',
+    image: '/.web-test-runner/assets/img/cheri.png',
     nameCN: '樱桃',
     nameDE: 'Claudia',
     nameEN: 'Cheri',
@@ -41,6 +42,7 @@ describe('VillagersList', () => {
     const element = document.createElement('villagers-list');
     element.villagers = villagers;
     document.body.appendChild(element);
+    await waitUntil(() => element.villagers);
 
     await visualDiff(element, 'villagers-list');
   });

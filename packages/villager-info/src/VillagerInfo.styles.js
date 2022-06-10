@@ -16,6 +16,5 @@ export const styles = css`
 
   .villager__img {
     width: 100px;
-    background-color: grey;
   }
 `;

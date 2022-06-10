@@ -11,10 +11,10 @@ describe('VillagerInfo', () => {
     await expect(element).to.be.accessible();
   });
 
-  it('should render a villager image', async () => {
+  it('should have a villager element', async () => {
     const element = await scopedFixture(html`<villager-info></villager-info>`);
     const villagerImg = element.shadowRoot.querySelector(
-      '[data-testid="villager-img"]'
+      '[data-testid="villager-element"]'
     );
 
     await waitUntil(() => villagerImg !== null);

@@ -6,8 +6,7 @@ import { styles } from './AcnhApp.styles.js';
 import { getVillagers } from '../../../services/getVillagers.js';
 import { AcnhHeader } from '../../acnh-header/index.js';
 import { AcnhMain } from '../../acnh-main/index.js';
-import { VillagersFilters } from '../../villagers-filters/index.js';
-import { VillagersList } from '../../villagers-list/index.js';
+import { AcnhHome } from '../../acnh-home/index.js';
 import { AcnhFooter } from '../../acnh-footer/index.js';
 import { Link } from '../../app-link/index.js';
 
@@ -16,8 +15,7 @@ export class AcnhApp extends router(ScopedElementsMixin(LitElement)) {
     return {
       'acnh-header': AcnhHeader,
       'acnh-main': AcnhMain,
-      'villagers-filters': VillagersFilters,
-      'villagers-list': VillagersList,
+      'acnh-home': AcnhHome,
       'acnh-footer': AcnhFooter,
       'app-link': Link,
     };
@@ -80,24 +78,19 @@ export class AcnhApp extends router(ScopedElementsMixin(LitElement)) {
       villager.nameEN.toLowerCase().includes(search)
     );
 
-    return this.filteredVillagers || this.villagers;
+    return this.filteredVillagers;
   }
 
   render() {
     console.log(this.filteredVillagers);
     return html`
       <acnh-header> </acnh-header>
-      <h2>Villagers information</h2>
       <acnh-main .activeRoute=${this.route}>
-        <villagers-filters
-          .villagers=${this.villagers}
+        <acnh-home
+          .villagers=${this.filteredVillagers}
           @click-search-button=${this.clickSearchButton}
           route="home"
-        ></villagers-filters>
-        <villagers-list
-          .villagers=${this.villagers}
-          route="home"
-        ></villagers-list>
+        ></acnh-home>
         <p route="my-villagers">Hello</p>
       </acnh-main>
       <acnh-footer></acnh-footer>

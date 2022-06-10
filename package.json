@@ -6,6 +6,7 @@
   "dependencies": {
     "@lion/ajax": "^0.16.0",
     "@lion/button": "^0.18.0",
+    "@lion/form": "^0.15.0",
     "@lion/input": "^0.18.0",
     "@lion/localize": "^0.25.0",
     "@lion/select-rich": "^0.31.0",
