@@ -1,10 +1,10 @@
 import { html } from 'lit-element';
 
-import { AcnhApp } from '../src/AcnhApp.js';
+import { AcnhApp } from '../index.js';
 window.customElements.define('acnh-app', AcnhApp);
 
 export default {
   title: 'AcnhApp',
 };
 
-export const FirstStory = () => html`<acnh-app></acnh-app>`;
+export const App = () => html`<acnh-app></acnh-app>`;

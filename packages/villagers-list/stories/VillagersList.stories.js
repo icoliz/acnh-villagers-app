@@ -1,6 +1,6 @@
 import { html } from 'lit-element';
 
-import { VillagersList } from '../src/VillagersList.js';
+import { VillagersList } from '../index.js';
 import { getVillagers } from '../../../services/getVillagers.js';
 
 window.customElements.define('villagers-list', VillagersList);

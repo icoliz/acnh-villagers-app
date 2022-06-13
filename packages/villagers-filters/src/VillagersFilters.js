@@ -39,7 +39,6 @@ export class VillagersFilters extends ScopedElementsMixin(LitElement) {
 
   onClickSearchButton(ev) {
     const formData = ev.target.serializedValue;
-    console.log(formData);
     this.dispatchEvent(
       new CustomEvent('click-search-button', {
         detail: formData['search-input'],
@@ -54,7 +53,6 @@ export class VillagersFilters extends ScopedElementsMixin(LitElement) {
           <lion-input
             name="search-input"
             placeholder="Example: Cheri"
-            data-testid="search-input"
             label="Villager name"
           ></lion-input>
           <lion-button-submit data-testid="search-button"

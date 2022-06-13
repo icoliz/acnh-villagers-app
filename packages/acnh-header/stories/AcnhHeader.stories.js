@@ -1,6 +1,6 @@
 import { html } from 'lit-element';
 
-import { AcnhHeader } from '../src/AcnhHeader.js';
+import { AcnhHeader } from '../index.js';
 
 window.customElements.define('acnh-header', AcnhHeader);
 

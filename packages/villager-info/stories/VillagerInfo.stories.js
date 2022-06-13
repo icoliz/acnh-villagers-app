@@ -1,6 +1,6 @@
 import { html } from 'lit-element';
 
-import { VillagerInfo } from '../src/VillagerInfo.js';
+import { VillagerInfo } from '../index.js';
 window.customElements.define('villager-info', VillagerInfo);
 
 const villager = {
@@ -22,5 +22,5 @@ export default {
   title: 'VillagerInfo',
 };
 
-export const VillagerInfoStory = () =>
+export const Info = () =>
   html`<villager-info .villager=${villager}></villager-info>`;
