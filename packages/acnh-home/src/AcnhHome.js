@@ -54,7 +54,10 @@ export class AcnhHome extends ScopedElementsMixin(LitElement) {
         .villagers=${this.villagers}
         @click-search-button=${this.clickSearchButton}
       ></villagers-filters>
-      <villagers-list .villagers=${this.filteredVillagers}></villagers-list>
+      <villagers-list
+        .villagers=${this.filteredVillagers}
+        data-testid="villagers-list"
+      ></villagers-list>
     `;
   }
 }

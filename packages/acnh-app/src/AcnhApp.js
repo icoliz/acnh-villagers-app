@@ -69,6 +69,7 @@ export class AcnhApp extends router(ScopedElementsMixin(LitElement)) {
       <acnh-main .activeRoute=${this.route}>
         <acnh-home
           .villagers=${this.filteredVillagers}
+          data-testid="acnh-home"
           route="home"
         ></acnh-home>
         <p route="my-villagers">My villagers</p>

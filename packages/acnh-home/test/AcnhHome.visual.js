@@ -1,9 +1,9 @@
 import { visualDiff } from '@web/test-runner-visual-regression';
 import { waitUntil } from '@open-wc/testing';
-import { VillagersList } from '../index.js';
+import { AcnhHome } from '../index.js';
 
-if (!customElements.get('villagers-list')) {
-  customElements.define('villagers-list', VillagersList);
+if (!customElements.get('acnh-home')) {
+  customElements.define('acnh-home', AcnhHome);
 }
 
 const villagers = [
@@ -37,23 +37,25 @@ const villagers = [
   },
 ];
 
-describe('VillagersList', () => {
-  it('should render villagers list', async () => {
-    const element = document.createElement('villagers-list');
+describe('AcnhHome', () => {
+  it('should render home component', async () => {
+    const element = document.createElement('acnh-home');
     element.villagers = villagers;
     document.body.appendChild(element);
     await waitUntil(() => element.villagers);
 
-    const villagerInfo = element.shadowRoot.querySelector(
+    const villagersList = element.shadowRoot.querySelector(
+      '[data-testid="villagers-list"]'
+    );
+    villagersList.villagers = villagers;
+    await waitUntil(() => villagersList.villagers);
+
+    const villagerInfo = villagersList.shadowRoot.querySelector(
       '[data-testid="villager-info"]'
     );
-    const villagerImg = villagerInfo.shadowRoot.querySelector(
-      '[data-testid="villager-img"]'
-    );
+    villagerInfo.villagers = villagers;
+    await waitUntil(() => villagersList.villagers);
 
-    console.log(villagerImg);
-    await waitUntil(() => villagerImg.src);
-
-    await visualDiff(element, 'villagers-list');
+    await visualDiff(element, 'acnh-home');
   });
 });
