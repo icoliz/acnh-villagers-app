@@ -27,7 +27,7 @@ export class AcnhHeader extends ScopedElementsMixin(LitElement) {
         <h1>Animal Crossing Villagers</h1>
         <nav>
           <ul>
-            <li><app-link href="/">All Villagers</app-link></li>
+            <li><app-link href="/">Home</app-link></li>
             <li><app-link href="/my-villagers">My villagers</app-link></li>
             <li><app-link href="/wishlist">Wishlist</app-link></li>
           </ul>

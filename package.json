@@ -26,7 +26,7 @@
     "start": "web-dev-server --node-resolve --app-index index.html --open --watch",
     "storybook": "wds --config .web-server-storybook/web-server-storybook.config.mjs",
     "test": "web-test-runner ./packages/**/test/*.test.js --node-resolve",
-    "test:watch": "web-test-runner ./packages/**/test/*.test.js --node-resolve --watch --coverage",
+    "test:watch": "web-test-runner \"./packages/**/test/*.test.js\" --node-resolve --watch --coverage",
     "test:visual": "web-test-runner --config .web-test-runner/web-test-runner.config.mjs",
     "test:visual-update": "web-test-runner --config .web-test-runner/web-test-runner.config.mjs --update-visual-baseline"
   },

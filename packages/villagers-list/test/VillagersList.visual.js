@@ -44,6 +44,15 @@ describe('VillagersList', () => {
     document.body.appendChild(element);
     await waitUntil(() => element.villagers);
 
+    const villagerInfo = element.shadowRoot.querySelector(
+      '[data-testid="villager-info"]'
+    );
+    const villagerImg = villagerInfo.shadowRoot.querySelector(
+      '[data-testid="villager-img"]'
+    );
+
+    await waitUntil(() => villagerImg);
+
     await visualDiff(element, 'villagers-list');
   });
 });

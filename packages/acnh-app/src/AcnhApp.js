@@ -3,7 +3,6 @@ import { ScopedElementsMixin } from '@open-wc/scoped-elements';
 import { router } from 'lit-element-router';
 
 import { styles } from './AcnhApp.styles.js';
-import { getVillagers } from '../../../services/getVillagers.js';
 import { AcnhHeader } from '../../acnh-header/index.js';
 import { AcnhMain } from '../../acnh-main/index.js';
 import { AcnhHome } from '../../acnh-home/index.js';
@@ -56,42 +55,24 @@ export class AcnhApp extends router(ScopedElementsMixin(LitElement)) {
 
     this.villagers = [];
     this.filteredVillagers = [];
+    this.wishlistVillagers = [];
     this.route = '';
-  }
-
-  connectedCallback() {
-    super.connectedCallback();
-
-    getVillagers().then((result) => {
-      this.villagers = result;
-    });
   }
 
   router(route) {
     this.route = route;
   }
 
-  clickSearchButton(inputValue) {
-    const search = inputValue.detail.toLowerCase();
-
-    this.filteredVillagers = this.villagers.filter((villager) =>
-      villager.nameEN.toLowerCase().includes(search)
-    );
-
-    return this.filteredVillagers;
-  }
-
   render() {
-    console.log(this.filteredVillagers);
     return html`
       <acnh-header> </acnh-header>
       <acnh-main .activeRoute=${this.route}>
         <acnh-home
           .villagers=${this.filteredVillagers}
-          @click-search-button=${this.clickSearchButton}
           route="home"
         ></acnh-home>
-        <p route="my-villagers">Hello</p>
+        <p route="my-villagers">My villagers</p>
+        <p route="wishlist">Wishlist</p>
       </acnh-main>
       <acnh-footer></acnh-footer>
     `;

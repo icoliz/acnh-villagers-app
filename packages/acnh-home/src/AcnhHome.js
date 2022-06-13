@@ -32,22 +32,24 @@ export class AcnhHome extends ScopedElementsMixin(LitElement) {
 
     getVillagers().then((result) => {
       this.villagers = result;
+      this.filteredVillagers = result;
     });
   }
 
   clickSearchButton(inputValue) {
     const search = inputValue.detail.toLowerCase();
 
-    this.filteredVillagers = this.villagers.filter((villager) =>
-      villager.nameEN.toLowerCase().includes(search)
+    this.filteredVillagers = this.villagers.filter(
+      (villager) =>
+        villager.nameEN.toLowerCase().includes(search) ||
+        villager.nameES.toLowerCase().includes(search)
     );
-
     return this.filteredVillagers;
   }
 
   render() {
     return html`
-      <h2>Villagers information</h2>
+      <h2>All villagers information</h2>
       <villagers-filters
         .villagers=${this.villagers}
         @click-search-button=${this.clickSearchButton}

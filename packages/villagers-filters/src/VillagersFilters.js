@@ -1,7 +1,7 @@
-import { LitElement, html, nothing } from 'lit-element';
+import { LitElement, html } from 'lit-element';
 import { ScopedElementsMixin } from '@open-wc/scoped-elements';
 import { LionInput } from '@lion/input';
-import { LionButton } from '@lion/button';
+import { LionButtonSubmit } from '@lion/button';
 import { LionForm } from '@lion/form';
 
 import { styles } from './VillagersFilters.styles.js';
@@ -9,7 +9,7 @@ import { styles } from './VillagersFilters.styles.js';
 export class VillagersFilters extends ScopedElementsMixin(LitElement) {
   static get scopedElements() {
     return {
-      'lion-button': LionButton,
+      'lion-button-submit': LionButtonSubmit,
       'lion-input': LionInput,
       'lion-form': LionForm,
     };
@@ -19,10 +19,15 @@ export class VillagersFilters extends ScopedElementsMixin(LitElement) {
     return styles;
   }
 
+  static get events() {
+    return {
+      click_search_button: 'click-search-button',
+    };
+  }
+
   static get properties() {
     return {
       villagers: { type: Array },
-      inputValue: { type: String },
     };
   }
 
@@ -30,33 +35,32 @@ export class VillagersFilters extends ScopedElementsMixin(LitElement) {
     super();
 
     this.villagers = [];
-    this.inputValue = '';
   }
 
-  onChangeSearchInput(event) {
-    this.inputValue = event.target.value;
-  }
-
-  onClickSearchButton() {
+  onClickSearchButton(ev) {
+    const formData = ev.target.serializedValue;
+    console.log(formData);
     this.dispatchEvent(
-      new CustomEvent('click-search-button', { detail: this.inputValue })
+      new CustomEvent('click-search-button', {
+        detail: formData['search-input'],
+      })
     );
   }
 
   render() {
-    console.log(this.villagers);
-    if (!this.villagers) {
-      return nothing;
-    }
     return html`
-      <lion-form class="form" @submit=${(event) => event.preventDefault()}>
-        <lion-input
-          placeholder="please write something..."
-          @input=${(event) => this.onChangeSearchInput(event)}
-        ></lion-input>
-        <lion-button @click=${(event) => this.onClickSearchButton(event)}
-          >Button</lion-button
-        >
+      <lion-form class="form" @submit=${this.onClickSearchButton}>
+        <form @submit=${(event) => event.preventDefault()}>
+          <lion-input
+            name="search-input"
+            placeholder="Example: Cheri"
+            data-testid="search-input"
+            label="Villager name"
+          ></lion-input>
+          <lion-button-submit data-testid="search-button"
+            >Button</lion-button-submit
+          >
+        </form>
       </lion-form>
     `;
   }

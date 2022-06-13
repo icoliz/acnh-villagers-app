@@ -23,6 +23,7 @@ export class VillagerInfo extends LitElement {
     return html`
       <li class="villager" data-testid="villager-element">
         <h3>${this.villager.nameEN}</h3>
+        <h4>${this.villager.nameES}</h4>
         <img
           class="villager__img"
           src=${this.villager.image}

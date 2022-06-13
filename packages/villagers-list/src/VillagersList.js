@@ -1,4 +1,4 @@
-import { LitElement, html } from 'lit-element';
+import { LitElement, html, nothing } from 'lit-element';
 import { ScopedElementsMixin } from '@open-wc/scoped-elements';
 
 import { VillagerInfo } from '../../villager-info/index.js';
@@ -28,11 +28,17 @@ export class VillagersList extends ScopedElementsMixin(LitElement) {
   }
 
   render() {
+    if (!this.villagers) {
+      return nothing;
+    }
     return html`
       <ul class="villagers">
         ${this.villagers.map(
           (villager) => html`
-            <villager-info .villager=${villager}></villager-info>
+            <villager-info
+              .villager=${villager}
+              data-testid="villager-info"
+            ></villager-info>
           `
         )}
       </ul>
