@@ -48,15 +48,16 @@ export class VillagersFilters extends ScopedElementsMixin(LitElement) {
 
   render() {
     return html`
-      <lion-form class="form" @submit=${this.onClickSearchButton}>
-        <form @submit=${(event) => event.preventDefault()}>
+      <lion-form class="lion-form" @submit=${this.onClickSearchButton}>
+        <form class="form" @submit=${(event) => event.preventDefault()}>
           <lion-input
+            class="search-input"
             name="search-input"
             placeholder="Example: Cheri"
             label="Villager name"
           ></lion-input>
-          <lion-button-submit data-testid="search-button"
-            >Button</lion-button-submit
+          <lion-button-submit class="search-button" data-testid="search-button"
+            >Search</lion-button-submit
           >
         </form>
       </lion-form>

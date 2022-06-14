@@ -12,4 +12,10 @@ export const styles = css`
   .main {
     background-color: lightblue;
   }
+
+  .acnh-home,
+  .my-villagers,
+  .wishlist {
+    min-height: 80vh;
+  }
 `;

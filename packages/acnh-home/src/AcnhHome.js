@@ -1,6 +1,7 @@
 import { LitElement, html } from 'lit-element';
 import { ScopedElementsMixin } from '@open-wc/scoped-elements';
 
+import { styles } from './AcnhHome.styles.js';
 import { getVillagers } from '../../../services/getVillagers.js';
 import { VillagersFilters } from '../../villagers-filters/index.js';
 import { VillagersList } from '../../villagers-list/index.js';
@@ -11,6 +12,10 @@ export class AcnhHome extends ScopedElementsMixin(LitElement) {
       'villagers-filters': VillagersFilters,
       'villagers-list': VillagersList,
     };
+  }
+
+  static get styles() {
+    return styles;
   }
 
   static get properties() {
@@ -49,11 +54,14 @@ export class AcnhHome extends ScopedElementsMixin(LitElement) {
 
   render() {
     return html`
-      <h2>All villagers information</h2>
-      <villagers-filters
-        .villagers=${this.villagers}
-        @click-search-button=${this.clickSearchButton}
-      ></villagers-filters>
+      <div class="home">
+        <h2 class="subtitle">All villagers information</h2>
+        <villagers-filters
+          class="villagers-filters"
+          .villagers=${this.villagers}
+          @click-search-button=${this.clickSearchButton}
+        ></villagers-filters>
+      </div>
       <villagers-list
         .villagers=${this.filteredVillagers}
         data-testid="villagers-list"

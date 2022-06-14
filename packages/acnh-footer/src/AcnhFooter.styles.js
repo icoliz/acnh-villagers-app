@@ -7,8 +7,15 @@ export const styles = css`
     padding: 0;
     box-sizing: border-box;
   }
+
   /* Styles */
+
+  a {
+    color: #000;
+  }
+
   .footer {
-    background-color: #eee8aa;
+    background-color: #fffae4;
+    padding: 15px 30px;
   }
 `;

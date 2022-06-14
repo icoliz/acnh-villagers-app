@@ -51,7 +51,6 @@ describe('VillagersList', () => {
       '[data-testid="villager-img"]'
     );
 
-    console.log(villagerImg);
     await waitUntil(() => villagerImg.src);
 
     await visualDiff(element, 'villagers-list');

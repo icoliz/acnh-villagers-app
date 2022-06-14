@@ -7,8 +7,10 @@ export const styles = css`
     padding: 0;
     box-sizing: border-box;
   }
+
   /* Styles */
   .villagers {
+    background-color: #a4eaf6;
     list-style-type: none;
     width: 100%;
     display: flex;

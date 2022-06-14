@@ -44,14 +44,12 @@ describe('VillagersList', () => {
     await expect(element).to.be.accessible();
   });
 
-  it.only('should return VillagerInfo component if there are villagers', async () => {
+  it('should return VillagerInfo component if there are villagers', async () => {
     const element = await scopedFixture(
       html`<villagers-list .villagers=${villagers}></villagers-list>`
     );
     const villagerInfo = element.shadowRoot.querySelector(
       '[data-testid="villager-info"]'
     );
-
-    console.log(villagerInfo);
   });
 });
