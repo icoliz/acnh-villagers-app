@@ -6,7 +6,7 @@ if (!customElements.get('villagers-filters')) {
 }
 
 describe('VillagersFilters', () => {
-  it('should render villagers list', async () => {
+  it('should render input and button to filter villagers', async () => {
     const element = document.createElement('villagers-filters');
     document.body.appendChild(element);
 

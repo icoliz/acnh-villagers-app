@@ -1,11 +1,11 @@
-import { html, fixture, expect, oneEvent } from "@open-wc/testing";
-import { VillagersFilters } from "../index.js";
+import { html, fixture, expect, oneEvent } from '@open-wc/testing';
+import { VillagersFilters } from '../index.js';
 
-describe("VillagersFilters", () => {
-  const scopedElements = { "villagers-filters": VillagersFilters };
+describe('VillagersFilters', () => {
+  const scopedElements = { 'villagers-filters': VillagersFilters };
   const scopedFixture = (template) => fixture(template, { scopedElements });
 
-  xit("should be accessible", async () => {
+  xit('should be accessible', async () => {
     const element = await scopedFixture(
       html`<villagers-filters></villagers-filters>`
     );
@@ -14,10 +14,15 @@ describe("VillagersFilters", () => {
   });
 
   // Review this test
-  it("should dispatch click-search-button event with the search", async () => {
+  it('should dispatch click-search-button event with the search', async () => {
     const element = await scopedFixture(
       html`<villagers-filters></villagers-filters>`
     );
+
+    const searchInput = element.shadowRoot.querySelector(
+      '[data-testid="search-input"]'
+    );
+    searchInput.modelValue = 'Cheri';
 
     const clickSearchButton = () =>
       element.shadowRoot.querySelector('[data-testid="search-button"]').click();
@@ -28,7 +33,6 @@ describe("VillagersFilters", () => {
       VillagersFilters.events.click_search_button
     );
 
-    // Review this test. Detail exists. Should it be specific?? How to show the detail
-    expect(detail).to.exist;
+    expect(detail).to.be.equal('Cheri');
   });
 });
