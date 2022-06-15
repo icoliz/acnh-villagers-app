@@ -9,7 +9,6 @@ export const styles = css`
   :host {
     --main-dark: #619c86;
     --main-medium: #86d3bd;
-    --background-light: #e8efdb;
   }
 
   .form {
