@@ -13,7 +13,6 @@ describe('VillagersFilters', () => {
     await expect(element).to.be.accessible();
   });
 
-  // Review this test
   it('should dispatch click-search-button event with the search', async () => {
     const element = await scopedFixture(
       html`<villagers-filters></villagers-filters>`
