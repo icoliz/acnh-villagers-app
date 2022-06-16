@@ -28,7 +28,7 @@ export class VillagersList extends ScopedElementsMixin(LitElement) {
   }
 
   render() {
-    if (!this.villagers) {
+    if (this.villagers.length === 0) {
       return nothing;
     }
     return html`

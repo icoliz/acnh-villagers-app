@@ -54,4 +54,15 @@ describe('VillagersList', () => {
 
     await expect(villagerInfo).to.exist;
   });
+
+  it('should return nothing if there are no villagers', async () => {
+    const element = await scopedFixture(
+      html`<villagers-list></villagers-list>`
+    );
+    const villagerInfo = element.shadowRoot.querySelector(
+      '[data-testid="villager-info"]'
+    );
+
+    await expect(villagerInfo).to.be.null;
+  });
 });
