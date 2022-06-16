@@ -51,5 +51,7 @@ describe('VillagersList', () => {
     const villagerInfo = element.shadowRoot.querySelector(
       '[data-testid="villager-info"]'
     );
+
+    await expect(villagerInfo).to.exist;
   });
 });
