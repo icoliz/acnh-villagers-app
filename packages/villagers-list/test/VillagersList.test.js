@@ -38,7 +38,7 @@ describe('VillagersList', () => {
 
   it('should be accessible', async () => {
     const element = await scopedFixture(
-      html`<villagers-list></villagers-list>`
+      html`<villagers-list .villagers=${villagers}></villagers-list>`
     );
 
     await expect(element).to.be.accessible();
