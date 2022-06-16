@@ -39,5 +39,8 @@ export default {
   title: 'VillagersList',
 };
 
-export const Villagers = () =>
+export const ListWithVillagers = () =>
   html`<villagers-list .villagers=${villagers}></villagers-list>`;
+
+export const ListWithoutVillagers = () =>
+  html`<villagers-list></villagers-list>`;
