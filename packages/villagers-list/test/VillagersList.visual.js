@@ -38,7 +38,7 @@ const villagers = [
 ];
 
 describe('VillagersList', () => {
-  it('should render villagers list', async () => {
+  it('should render villagers list with villagers', async () => {
     const element = document.createElement('villagers-list');
     element.villagers = villagers;
     document.body.appendChild(element);
@@ -47,12 +47,20 @@ describe('VillagersList', () => {
     const villagerInfo = element.shadowRoot.querySelector(
       '[data-testid="villager-info"]'
     );
+
     const villagerImg = villagerInfo.shadowRoot.querySelector(
       '[data-testid="villager-img"]'
     );
 
     await waitUntil(() => villagerImg.src);
 
-    await visualDiff(element, 'villagers-list');
+    await visualDiff(element, 'villagers-list/with-villagers');
+  });
+
+  it('should render villagers list without villagers', async () => {
+    const element = document.createElement('villagers-list');
+    document.body.appendChild(element);
+
+    await visualDiff(element, 'villagers-list/without-villagers');
   });
 });
