@@ -13,4 +13,19 @@ describe('AppLink', () => {
 
     expect(link).to.have.attribute('href');
   });
+
+  it('should call navigate when the link is clicked', async () => {
+    const element = await scopedFixture(html`<app-link></app-link>`);
+
+    element.href = 'my-villagers';
+
+    const clickLink = element.shadowRoot
+      .querySelector('[data-testid="link"]')
+      .click();
+    setTimeout(clickLink);
+
+    const navigator = sinonSpy(window.navigator, 'navigate');
+
+    expect(navigator.called()).to.be.true;
+  });
 });
