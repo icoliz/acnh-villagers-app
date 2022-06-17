@@ -39,27 +39,35 @@ const villagers = [
 
 describe('VillagersList', () => {
   it('should render villagers list with villagers', async () => {
-    const element = document.createElement('villagers-list');
-    element.villagers = villagers;
+    const element = document.createElement('div');
     document.body.appendChild(element);
-    await waitUntil(() => element.villagers);
+    element.style = 'background-color: #fff; padding: 16px';
 
-    const villagerInfo = element.shadowRoot.querySelector(
-      '[data-testid="villager-info"]'
+    const villagersListEl = document.createElement('villagers-list');
+    villagersListEl.villagers = villagers;
+    element.appendChild(villagersListEl);
+    await waitUntil(() => villagersListEl.villagers);
+
+    const punchyInfo = villagersListEl.shadowRoot.querySelector(
+      '[data-testid="villager-info-48"]'
     );
 
-    const villagerImg = villagerInfo.shadowRoot.querySelector(
+    const punchyImg = punchyInfo.shadowRoot.querySelector(
       '[data-testid="villager-img"]'
     );
 
-    await waitUntil(() => villagerImg.src);
+    await waitUntil(() => punchyImg.src);
 
     await visualDiff(element, 'villagers-list/with-villagers');
   });
 
   it('should render villagers list without villagers', async () => {
-    const element = document.createElement('villagers-list');
+    const element = document.createElement('div');
     document.body.appendChild(element);
+    element.style = 'background-color: #fff; padding: 16px';
+
+    const villagersListEl = document.createElement('villagers-list');
+    element.appendChild(villagersListEl);
 
     await visualDiff(element, 'villagers-list/without-villagers');
   });
