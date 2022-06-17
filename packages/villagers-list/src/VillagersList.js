@@ -38,7 +38,7 @@ export class VillagersList extends ScopedElementsMixin(LitElement) {
             <li>
               <villager-info
                 .villager=${villager}
-                data-testid="villager-info"
+                data-testid="villager-info-${villager.id}"
               ></villager-info>
             </li>
           `
