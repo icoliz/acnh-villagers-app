@@ -6,26 +6,26 @@ describe('AppLink', () => {
   const scopedElements = { 'app-link': Link };
   const scopedFixture = (template) => fixture(template, { scopedElements });
 
-  it('should have href attribute', async () => {
-    const element = await scopedFixture(html`<app-link></app-link>`);
+  it('should have a link that navigates to the given href', async () => {
+    const element = await scopedFixture(
+      html`<app-link href="/my-villagers"></app-link>`
+    );
 
-    const link = element.shadowRoot.querySelector('[data-testid="link"]');
+    const link = element.shadowRoot.querySelector('a');
 
-    expect(link).to.have.attribute('href');
+    expect(link.href).to.equal('http://localhost:8000/my-villagers');
   });
 
-  it('should call navigate when the link is clicked', async () => {
-    const element = await scopedFixture(html`<app-link></app-link>`);
+  it('should call navigate with the specified route when the link is clicked', async () => {
+    const element = await scopedFixture(
+      html`<app-link href="/my-villagers"></app-link>`
+    );
 
-    element.href = 'my-villagers';
+    const navigatorSpy = sinonSpy(element, 'navigate');
 
-    const clickLink = element.shadowRoot
-      .querySelector('[data-testid="link"]')
-      .click();
-    setTimeout(clickLink);
+    const link = element.shadowRoot.querySelector('a');
+    link.click();
 
-    const navigator = sinonSpy(window.navigator, 'navigate');
-
-    expect(navigator.called()).to.be.true;
+    expect(navigatorSpy.calledWith('/my-villagers')).to.be.true;
   });
 });
