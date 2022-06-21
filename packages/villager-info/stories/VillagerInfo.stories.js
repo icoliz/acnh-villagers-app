@@ -22,5 +22,7 @@ export default {
   title: 'VillagerInfo',
 };
 
-export const Info = () =>
+export const WithVillager = () =>
   html`<villager-info .villager=${villager}></villager-info>`;
+
+export const WithoutVillager = () => html`<villager-info></villager-info>`;
