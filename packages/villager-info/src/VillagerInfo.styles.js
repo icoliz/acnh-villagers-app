@@ -39,7 +39,7 @@ export const styles = css`
   }
 
   .villager__nameES {
-    color: #03948a;
+    color: #006961;
     font-weight: 500;
   }
 
