@@ -38,4 +38,14 @@ describe('VillagerInfo', () => {
 
     await expect(villagerElement).to.exist;
   });
+
+  it('should render nothing if villager object is empty', async () => {
+    const element = await scopedFixture(html`<villager-info></villager-info>`);
+
+    const villagerElement = element.shadowRoot.querySelector(
+      '[data-testid="villager-element"]'
+    );
+
+    await expect(villagerElement).to.be.null;
+  });
 });
