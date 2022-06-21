@@ -24,7 +24,7 @@ export class VillagerInfo extends LitElement {
   }
 
   render() {
-    if (isVillagerEmpty(this.villager)) {
+    if (this.isVillagerEmpty(this.villager)) {
       return nothing;
     }
 
