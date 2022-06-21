@@ -1,4 +1,4 @@
-import { LitElement, html } from 'lit-element';
+import { LitElement, html, nothing } from 'lit-element';
 
 import { styles } from './VillagerInfo.styles.js';
 
@@ -19,7 +19,15 @@ export class VillagerInfo extends LitElement {
     this.villager = {};
   }
 
+  isVillagerEmpty(villager) {
+    return Object.keys(villager).length === 0;
+  }
+
   render() {
+    if (isVillagerEmpty(this.villager)) {
+      return nothing;
+    }
+
     return html`
       <article class="villager" data-testid="villager-element">
         <h3 class="villager__nameEN">${this.villager.nameEN}</h3>
