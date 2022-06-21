@@ -59,7 +59,7 @@ export class VillagerInfo extends LocalizeMixin(LitElement) {
         />
         <p class="villager__species">${this.villager.species}</p>
         <p class="villager__personality">
-          ${localize.msg('villager-info:personality')}:
+          ${localize.msg(`${LOCALE_KEY}:personality`)}:
           ${this.villager.personality}
         </p>
       </article>
