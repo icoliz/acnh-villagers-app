@@ -28,16 +28,14 @@ describe('VillagerInfo', () => {
     await expect(element).to.be.accessible();
   });
 
-  it('should have a villager element', async () => {
+  it('should render a villager element if a villager is passed', async () => {
     const element = await scopedFixture(
       html`<villager-info .villager=${villager}></villager-info>`
     );
-    const villagerImg = element.shadowRoot.querySelector(
+    const villagerElement = element.shadowRoot.querySelector(
       '[data-testid="villager-element"]'
     );
 
-    await waitUntil(() => villagerImg);
-
-    await expect(villagerImg).to.exist;
+    await expect(villagerElement).to.exist;
   });
 });
