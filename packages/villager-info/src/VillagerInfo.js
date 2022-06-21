@@ -1,10 +1,29 @@
 import { LitElement, html, nothing } from 'lit-element';
+import { localize, LocalizeMixin } from '@lion/localize';
 
 import { styles } from './VillagerInfo.styles.js';
 
-export class VillagerInfo extends LitElement {
+const LOCALE_KEY = 'villager-info';
+
+export class VillagerInfo extends LocalizeMixin(LitElement) {
   static get styles() {
     return styles;
+  }
+
+  static get localizeNamespaces() {
+    return [
+      {
+        [LOCALE_KEY]: (locale) => {
+          const namespaces = {
+            'en-GB': () => import('../translations/en-GB.js'),
+            'es-ES': () => import('../translations/es-ES.js'),
+          };
+
+          return (namespaces[locale] || namespaces['en-GB'])();
+        },
+      },
+      ...super.localizeNamespaces,
+    ];
   }
 
   static get properties() {
@@ -40,7 +59,8 @@ export class VillagerInfo extends LitElement {
         />
         <p class="villager__species">${this.villager.species}</p>
         <p class="villager__personality">
-          Personality: ${this.villager.personality}
+          ${localize.msg('villager-info:personality')}:
+          ${this.villager.personality}
         </p>
       </article>
     `;
