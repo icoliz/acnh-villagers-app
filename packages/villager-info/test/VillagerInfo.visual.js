@@ -1,5 +1,5 @@
 import { visualDiff } from '@web/test-runner-visual-regression';
-import { waitUntil } from '@open-wc/testing';
+import { aTimeout, waitUntil } from '@open-wc/testing';
 
 import { VillagerInfo } from '../index.js';
 
@@ -32,6 +32,9 @@ describe('VillagerInfo', () => {
     villagerInfoEl.villager = villager;
     element.appendChild(villagerInfoEl);
     await waitUntil(() => villagerInfoEl.villager);
+
+    // TODO: review this test, tags inside the element are not accessible (apparently because of the localize mixin?)
+    await aTimeout(200);
 
     await visualDiff(element, 'villager-info/with-villager');
   });
