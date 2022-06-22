@@ -22,7 +22,17 @@ export default {
   title: 'VillagerInfo',
 };
 
-export const WithVillager = () =>
-  html`<villager-info .villager=${villager}></villager-info>`;
+export const WithVillager = (args) =>
+  html`<villager-info .villager=${args.villager}></villager-info>`;
+
+WithVillager.args = {
+  villager: {
+    icon: 'https://acnhapi.com/v1/icons/villagers/1',
+    nameEN: 'Cyrano',
+    nameES: 'Cirano',
+    personality: 'Cranky',
+    species: 'Anteater',
+  },
+};
 
 export const WithoutVillager = () => html`<villager-info></villager-info>`;
