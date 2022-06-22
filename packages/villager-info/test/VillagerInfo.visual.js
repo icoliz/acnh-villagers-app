@@ -23,10 +23,15 @@ const villager = {
 
 describe('VillagerInfo', () => {
   it("should render a villager's information", async () => {
-    const element = document.createElement('villager-info');
-    element.villager = villager;
+    const element = document.createElement('div');
     document.body.appendChild(element);
-    await waitUntil(() => element.villager);
+    element.style = 'background-color: #fff; padding: 16px';
+
+    const villagerInfoEl = document.createElement('villager-info');
+    villagerInfoEl.villager = villager;
+    element.appendChild(villagerInfoEl);
+
+    await waitUntil(() => villagerInfoEl.villager);
 
     const villagerImg = element.shadowRoot.querySelector(
       '[data-testid="villager-img"]'
@@ -34,6 +39,17 @@ describe('VillagerInfo', () => {
 
     await waitUntil(() => villagerImg);
 
-    await visualDiff(element, 'villager-info');
+    await visualDiff(element, 'villager-info/with-villager');
+  });
+
+  it('should render no villager', async () => {
+    const element = document.createElement('div');
+    document.body.appendChild(element);
+    element.style = 'background-color: #fff; padding: 16px';
+
+    const villagerInfoEl = document.createElement('villager-info');
+    element.appendChild(villagerInfoEl);
+
+    await visualDiff(element, 'villager-info/without-villager');
   });
 });
