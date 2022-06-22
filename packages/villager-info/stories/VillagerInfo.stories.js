@@ -1,6 +1,7 @@
 import { html } from 'lit-element';
 
 import { VillagerInfo } from '../index.js';
+
 window.customElements.define('villager-info', VillagerInfo);
 
 const villager = {
@@ -22,8 +23,17 @@ export default {
   title: 'VillagerInfo',
 };
 
-export const WithVillager = (args) =>
-  html`<villager-info .villager=${args.villager}></villager-info>`;
+const Template = (args) => {
+  return html`<villager-info
+    .villager=${args.villager}
+    ?showWishlistButton=${args.showWishlistButton}
+    ?isInWishlist=${args.isInWishlist}
+    ?showMyVillagersButton=${args.showMyVillagersButton}
+    ?isInMyVillagersList=${args.isInMyVillagersList}
+  ></villager-info>`;
+};
+
+export const WithVillager = Template.bind({});
 
 WithVillager.args = {
   villager: {
@@ -33,6 +43,10 @@ WithVillager.args = {
     personality: 'Cranky',
     species: 'Anteater',
   },
+  showWishlistButton: true,
+  isInWishlist: true,
+  showMyVillagersButton: true,
+  isInMyVillagersList: true,
 };
 
 export const WithoutVillager = () => html`<villager-info></villager-info>`;
