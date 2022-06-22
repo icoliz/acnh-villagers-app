@@ -1,11 +1,21 @@
 import { LitElement, html, nothing } from 'lit-element';
+import { ScopedElementsMixin } from '@open-wc/scoped-elements';
 import { localize, LocalizeMixin } from '@lion/localize';
+import { LionButton } from '@lion/button';
 
 import { styles } from './VillagerInfo.styles.js';
 
 const LOCALE_KEY = 'villager-info';
 
-export class VillagerInfo extends LocalizeMixin(LitElement) {
+export class VillagerInfo extends LocalizeMixin(
+  ScopedElementsMixin(LitElement)
+) {
+  static get scopedElements() {
+    return {
+      'lion-button': LionButton,
+    };
+  }
+
   static get styles() {
     return styles;
   }
@@ -48,9 +58,9 @@ export class VillagerInfo extends LocalizeMixin(LitElement) {
 
     this.villager = {};
     this.showWishlistButton = true;
-    this.isInWishlist = true;
+    this.isInWishlist = false;
     this.showMyVillagersButton = true;
-    this.isInMyVillagersList = true;
+    this.isInMyVillagersList = false;
   }
 
   isVillagerEmpty(villager) {
@@ -71,6 +81,35 @@ export class VillagerInfo extends LocalizeMixin(LitElement) {
     this.dispatchEvent(
       new CustomEvent('click-add-wishlist', { detail: villagerId })
     );
+  }
+
+  renderMyVillagersButton() {
+    return html`
+      <lion-button
+        class="my-villagers-button
+        ${this.showMyVillagersButton ? null : 'hidden'}"
+        data-id=${this.villager.id}
+        @click=${(event) => this.onClickMyVillagersButton(event)}
+      >
+        ${this.isInMyVillagersList
+          ? localize.msg(`${LOCALE_KEY}:isInMyVillagers`)
+          : localize.msg(`${LOCALE_KEY}:isNotInMyVillagers`)}
+      </lion-button>
+    `;
+  }
+
+  renderWishlistButton() {
+    return html`
+      <lion-button
+        class="wishlist-button
+        ${this.showWishlistButton ? null : 'hidden'}"
+        @click=${(event) => this.onClickWishlistButton(event)}
+      >
+        ${this.isInWishlist
+          ? localize.msg(`${LOCALE_KEY}:isInWishlist`)
+          : localize.msg(`${LOCALE_KEY}:isNotInWishlist`)}
+      </lion-button>
+    `;
   }
 
   render() {
@@ -94,19 +133,7 @@ export class VillagerInfo extends LocalizeMixin(LitElement) {
           ${this.villager.personality}
         </p>
       </article>
-      <button
-        class="my-villagers-button"
-        data-id=${this.villager.id}
-        @click=${(event) => this.onClickMyVillagersButton(event)}
-      >
-        My Villagers
-      </button>
-      <button
-        class="wishlist-button"
-        @click=${(event) => this.onClickWishlistButton(event)}
-      >
-        Wishlist
-      </button>
+      ${this.renderMyVillagersButton()} ${this.renderWishlistButton()}
     `;
   }
 }
