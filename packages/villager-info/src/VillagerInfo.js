@@ -29,6 +29,10 @@ export class VillagerInfo extends LocalizeMixin(LitElement) {
   static get properties() {
     return {
       villager: { type: Object },
+      showFavoriteButton: { type: Boolean },
+      isInFavoriteList: { type: Boolean },
+      showMyVillagersButton: { type: Boolean },
+      isInMyVillagersList: { type: Boolean },
     };
   }
 
@@ -36,6 +40,10 @@ export class VillagerInfo extends LocalizeMixin(LitElement) {
     super();
 
     this.villager = {};
+    this.showFavoriteButton = true;
+    this.isInFavoriteList = true;
+    this.showMyVillagersButton = true;
+    this.isInMyVillagersList = true;
   }
 
   isVillagerEmpty(villager) {
