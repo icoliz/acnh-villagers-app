@@ -1,5 +1,6 @@
 import { visualDiff } from '@web/test-runner-visual-regression';
 import { waitUntil } from '@open-wc/testing';
+
 import { VillagerInfo } from '../index.js';
 
 if (!customElements.get('villager-info')) {
@@ -22,7 +23,7 @@ const villager = {
 };
 
 describe('VillagerInfo', () => {
-  it("should render a villager's information", async () => {
+  it('should render a villager', async () => {
     const element = document.createElement('div');
     document.body.appendChild(element);
     element.style = 'background-color: #fff; padding: 16px';
@@ -30,14 +31,7 @@ describe('VillagerInfo', () => {
     const villagerInfoEl = document.createElement('villager-info');
     villagerInfoEl.villager = villager;
     element.appendChild(villagerInfoEl);
-
     await waitUntil(() => villagerInfoEl.villager);
-
-    const villagerImg = element.shadowRoot.querySelector(
-      '[data-testid="villager-img"]'
-    );
-
-    await waitUntil(() => villagerImg);
 
     await visualDiff(element, 'villager-info/with-villager');
   });
