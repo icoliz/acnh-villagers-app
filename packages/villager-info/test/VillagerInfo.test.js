@@ -1,4 +1,4 @@
-import { html, fixture, expect, waitUntil } from '@open-wc/testing';
+import { html, fixture, expect, oneEvent } from '@open-wc/testing';
 import { VillagerInfo } from '../index.js';
 
 const villager = {
@@ -47,5 +47,39 @@ describe('VillagerInfo', () => {
     );
 
     await expect(villagerElement).to.be.null;
+  });
+
+  // TODO: to review
+  it('should dispatch add-my-villager event when my villagers button is clicked', async () => {
+    const element = await scopedFixture(
+      html`<villager-info .villager=${villager}></villager-info>`
+    );
+
+    const myVillagersButton = element.shadowRoot.querySelector(
+      '[data-testid="my-villager-button"]'
+    );
+
+    setTimeout(() => myVillagersButton.click());
+
+    const clickAddMyVillager = await oneEvent(element, 'add-my-villager');
+
+    await expect(clickAddMyVillager).to.exist;
+  });
+
+  // TODO: to review
+  it('should dispatch add-wishlist event when wishlist button is clicked', async () => {
+    const element = await scopedFixture(
+      html`<villager-info .villager=${villager}></villager-info>`
+    );
+
+    const wishlistButton = element.shadowRoot.querySelector(
+      '[data-testid="wishlist-button"]'
+    );
+
+    setTimeout(() => wishlistButton.click());
+
+    const clickAddWishlist = await oneEvent(element, 'add-wishlist');
+
+    await expect(clickAddWishlist).to.exist;
   });
 });

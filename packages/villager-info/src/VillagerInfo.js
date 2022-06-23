@@ -38,8 +38,8 @@ export class VillagerInfo extends LocalizeMixin(
 
   static get events() {
     return {
-      click_add_my_villager: 'click-add-my-villager',
-      click_add_wishlist: 'click-add-wishlist',
+      add_my_villager: 'add-my-villager',
+      add_wishlist: 'add-wishlist',
     };
   }
 
@@ -67,28 +67,20 @@ export class VillagerInfo extends LocalizeMixin(
     return Object.keys(villager).length === 0;
   }
 
-  onClickMyVillagersButton(event) {
-    const villagerId = parseInt(event.target.dataset.id);
-
-    this.dispatchEvent(
-      new CustomEvent('click-add-my-villager', { detail: villagerId })
-    );
+  onClickMyVillagersButton() {
+    this.dispatchEvent(new CustomEvent('add-my-villager'));
   }
 
-  onClickWishlistButton(event) {
-    const villagerId = parseInt(event.target.dataset.id);
-
-    this.dispatchEvent(
-      new CustomEvent('click-add-wishlist', { detail: villagerId })
-    );
+  onClickWishlistButton() {
+    this.dispatchEvent(new CustomEvent('add-wishlist'));
   }
 
   renderMyVillagersButton() {
     return html`
       <lion-button
-        class="my-villagers-button
+        class="my-villager-button
         ${this.showMyVillagersButton ? null : 'hidden'}"
-        data-id=${this.villager.id}
+        data-testid="my-villager-button"
         @click=${(event) => this.onClickMyVillagersButton(event)}
       >
         ${this.isInMyVillagersList
@@ -103,6 +95,7 @@ export class VillagerInfo extends LocalizeMixin(
       <lion-button
         class="wishlist-button
         ${this.showWishlistButton ? null : 'hidden'}"
+        data-testid="wishlist-button"
         @click=${(event) => this.onClickWishlistButton(event)}
       >
         ${this.isInWishlist
