@@ -33,7 +33,14 @@ describe('VillagerInfo', () => {
     element.appendChild(villagerInfoEl);
     await waitUntil(() => villagerInfoEl.villager);
 
-    // TODO: review this test, tags inside the element are not accessible (apparently because of the localize mixin?)
+    await aTimeout(200);
+
+    const villagerImg = villagerInfoEl.shadowRoot.querySelector(
+      '[data-testid="villager-img"]'
+    );
+
+    await waitUntil(() => villagerImg);
+
     await aTimeout(200);
 
     await visualDiff(element, 'villager-info/with-villager');
