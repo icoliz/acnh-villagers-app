@@ -3,10 +3,6 @@ import { html, fixture, aTimeout, waitUntil } from '@open-wc/testing';
 
 import { VillagerInfo } from '../index.js';
 
-if (!customElements.get('villager-info')) {
-  customElements.define('villager-info', VillagerInfo);
-}
-
 const villager = {
   birthday: '17/3',
   birthday_string: 'March 17th',
