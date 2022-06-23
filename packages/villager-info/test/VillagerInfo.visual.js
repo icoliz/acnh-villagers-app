@@ -1,5 +1,5 @@
 import { visualDiff } from '@web/test-runner-visual-regression';
-import { aTimeout, waitUntil } from '@open-wc/testing';
+import { html, fixture, aTimeout, waitUntil } from '@open-wc/testing';
 
 import { VillagerInfo } from '../index.js';
 
@@ -23,36 +23,33 @@ const villager = {
 };
 
 describe('VillagerInfo', () => {
+  const scopedElements = { 'villager-info': VillagerInfo };
+  const scopedFixture = (template) =>
+    fixture(
+      html`
+        <div style="background-color: #fff; padding: 16px">${template}</div>
+      `,
+      { scopedElements }
+    );
+
   it('should render a villager', async () => {
-    const element = document.createElement('div');
-    document.body.appendChild(element);
-    element.style = 'background-color: #fff; padding: 16px';
+    const element = await scopedFixture(html`
+      <villager-info .villager=${villager}></villager-info>
+    `);
 
-    const villagerInfoEl = document.createElement('villager-info');
-    villagerInfoEl.villager = villager;
-    element.appendChild(villagerInfoEl);
-    await waitUntil(() => villagerInfoEl.villager);
-
+    const villagerInfoEl = element.querySelector('villager-info');
     await aTimeout(200);
 
     const villagerImg = villagerInfoEl.shadowRoot.querySelector(
       '[data-testid="villager-img"]'
     );
-
     await waitUntil(() => villagerImg);
-
-    await aTimeout(200);
 
     await visualDiff(element, 'villager-info/with-villager');
   });
 
   it('should render no villager', async () => {
-    const element = document.createElement('div');
-    document.body.appendChild(element);
-    element.style = 'background-color: #fff; padding: 16px';
-
-    const villagerInfoEl = document.createElement('villager-info');
-    element.appendChild(villagerInfoEl);
+    const element = await scopedFixture(html`<villager-info></villager-info>`);
 
     await visualDiff(element, 'villager-info/without-villager');
   });
