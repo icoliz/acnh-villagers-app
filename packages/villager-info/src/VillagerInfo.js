@@ -118,7 +118,8 @@ export class VillagerInfo extends LocalizeMixin(
           class="villager__img"
           src=${this.villager.icon}
           data-testid="villager-img"
-          alt="Picture of ${this.villager.nameEN}"
+          alt="${localize.msg(`${LOCALE_KEY}:imageAltText`)}
+          ${this.villager.nameEN}"
         />
         <p class="villager__species">${this.villager.species}</p>
         <p class="villager__personality">

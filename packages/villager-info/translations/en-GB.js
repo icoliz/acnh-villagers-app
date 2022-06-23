@@ -4,4 +4,5 @@ export default {
   isNotInMyVillagers: 'Add to My Villagers',
   isInWishlist: 'Remove from Wishlist',
   isNotInWishlist: 'Add to Wishlist',
+  imageAltText: 'Picture of',
 };
