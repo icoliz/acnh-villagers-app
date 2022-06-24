@@ -1,6 +1,7 @@
 import { html, fixture, expect } from '@open-wc/testing';
-import { Link } from '../index.js';
 import { spy as sinonSpy } from 'sinon';
+
+import { Link } from '../index.js';
 
 describe('AppLink', () => {
   const scopedElements = { 'app-link': Link };
@@ -13,7 +14,7 @@ describe('AppLink', () => {
 
     const link = element.shadowRoot.querySelector('a');
 
-    expect(link.href).to.equal('http://localhost:8000/my-villagers');
+    expect(link.href.includes('/my-villagers')).to.be.true;
   });
 
   it('should call navigate with the specified route when the link is clicked', async () => {
