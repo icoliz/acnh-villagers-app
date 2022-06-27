@@ -5,7 +5,7 @@ describe('VillagersFilters', () => {
   const scopedElements = { 'villagers-filters': VillagersFilters };
   const scopedFixture = (template) => fixture(template, { scopedElements });
 
-  xit('should be accessible', async () => {
+  it('should be accessible', async () => {
     const element = await scopedFixture(
       html`<villagers-filters></villagers-filters>`
     );
