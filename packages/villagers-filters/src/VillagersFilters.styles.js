@@ -7,9 +7,7 @@ export const styles = css`
   }
   /* Styles */
   :host {
-    --main-dark: #619c86;
     --main-medium: #86d3bd;
-    --background-light: #e8efdb;
   }
 
   .form {
@@ -30,8 +28,9 @@ export const styles = css`
   .search-button {
     display: flex;
     justify-content: center;
-    background-color: #02aba0;
+    background-color: #007e76;
     color: #fff;
+    font-size: 20px;
     width: 100%;
     height: 45px;
     border-radius: 23px;
@@ -39,7 +38,7 @@ export const styles = css`
   }
 
   .search-button:hover {
-    background-color: #03948a;
+    background-color: #006962;
     border: none;
   }
 `;
