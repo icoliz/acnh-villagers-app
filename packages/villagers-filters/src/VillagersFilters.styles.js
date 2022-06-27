@@ -7,7 +7,6 @@ export const styles = css`
   }
   /* Styles */
   :host {
-    --main-dark: #619c86;
     --main-medium: #86d3bd;
   }
 
