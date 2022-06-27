@@ -20,7 +20,8 @@
     "@web/dev-server": "^0.1.31",
     "@web/dev-server-storybook": "^0.5.1",
     "@web/test-runner": "^0.13.29",
-    "@web/test-runner-visual-regression": "^0.6.5"
+    "@web/test-runner-visual-regression": "^0.6.5",
+    "sinon": "^14.0.0"
   },
   "scripts": {
     "start": "web-dev-server --node-resolve --app-index index.html --open --watch",
