@@ -28,17 +28,18 @@ export class VillagersList extends ScopedElementsMixin(LitElement) {
   }
 
   render() {
-    if (!this.villagers) {
+    if (this.villagers.length === 0) {
       return nothing;
     }
+
     return html`
-      <ul class="villagers">
+      <ul class="villagers" data-testid="villagers-ul">
         ${this.villagers.map(
           (villager) => html`
             <li>
               <villager-info
                 .villager=${villager}
-                data-testid="villager-info"
+                data-testid="villager-info-${villager.id}"
               ></villager-info>
             </li>
           `

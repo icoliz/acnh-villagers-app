@@ -1,4 +1,4 @@
-import { html, fixture, expect, waitUntil } from '@open-wc/testing';
+import { html, fixture, expect } from '@open-wc/testing';
 import { VillagersList } from '../index.js';
 
 const villagers = [
@@ -38,7 +38,7 @@ describe('VillagersList', () => {
 
   it('should be accessible', async () => {
     const element = await scopedFixture(
-      html`<villagers-list></villagers-list>`
+      html`<villagers-list .villagers=${villagers}></villagers-list>`
     );
 
     await expect(element).to.be.accessible();
@@ -49,7 +49,20 @@ describe('VillagersList', () => {
       html`<villagers-list .villagers=${villagers}></villagers-list>`
     );
     const villagerInfo = element.shadowRoot.querySelector(
-      '[data-testid="villager-info"]'
+      '[data-testid="villagers-ul"]'
     );
+
+    await expect(villagerInfo).to.exist;
+  });
+
+  it('should return nothing if there are no villagers', async () => {
+    const element = await scopedFixture(
+      html`<villagers-list></villagers-list>`
+    );
+    const villagerInfo = element.shadowRoot.querySelector(
+      '[data-testid="villagers-ul"]'
+    );
+
+    await expect(villagerInfo).to.be.null;
   });
 });

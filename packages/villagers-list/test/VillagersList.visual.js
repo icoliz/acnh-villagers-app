@@ -1,10 +1,7 @@
 import { visualDiff } from '@web/test-runner-visual-regression';
-import { waitUntil } from '@open-wc/testing';
-import { VillagersList } from '../index.js';
+import { html, fixture, waitUntil } from '@open-wc/testing';
 
-if (!customElements.get('villagers-list')) {
-  customElements.define('villagers-list', VillagersList);
-}
+import { VillagersList } from '../index.js';
 
 const villagers = [
   {
@@ -38,21 +35,48 @@ const villagers = [
 ];
 
 describe('VillagersList', () => {
-  it('should render villagers list', async () => {
-    const element = document.createElement('villagers-list');
-    element.villagers = villagers;
-    document.body.appendChild(element);
-    await waitUntil(() => element.villagers);
-
-    const villagerInfo = element.shadowRoot.querySelector(
-      '[data-testid="villager-info"]'
+  const scopedElements = { 'villagers-list': VillagersList };
+  const scopedFixture = (template) =>
+    fixture(
+      html`<div style="background-color: #fff; padding: 16px">
+        ${template}
+      </div>`,
+      { scopedElements }
     );
-    const villagerImg = villagerInfo.shadowRoot.querySelector(
+
+  it('should render villagers list with villagers', async () => {
+    const element = await scopedFixture(
+      html`<villagers-list .villagers=${villagers}></villagers-list>`
+    );
+
+    const villagersListEl = element.querySelector('villagers-list');
+    await waitUntil(() => villagersListEl !== null);
+
+    const punchyInfo = villagersListEl.shadowRoot.querySelector(
+      '[data-testid="villager-info-48"]'
+    );
+    const cheriInfo = villagersListEl.shadowRoot.querySelector(
+      '[data-testid="villager-info-48"]'
+    );
+
+    const punchyImg = punchyInfo.shadowRoot.querySelector(
+      '[data-testid="villager-img"]'
+    );
+    const cheriImg = cheriInfo.shadowRoot.querySelector(
       '[data-testid="villager-img"]'
     );
 
-    await waitUntil(() => villagerImg.src);
+    await waitUntil(() => punchyImg);
+    await waitUntil(() => cheriImg);
 
-    await visualDiff(element, 'villagers-list');
+    await visualDiff(element, 'villagers-list/with-villagers');
+  });
+
+  it('should render villagers list without villagers', async () => {
+    const element = await scopedFixture(
+      html`<villagers-list></villagers-list>`
+    );
+
+    await visualDiff(element, 'villagers-list/without-villagers');
   });
 });
