@@ -81,7 +81,7 @@ export class VillagerInfo extends LocalizeMixin(
         class="my-villager-button
         ${this.showMyVillagersButton ? null : 'hidden'}"
         data-testid="my-villager-button"
-        @click=${(event) => this.onClickMyVillagersButton(event)}
+        @click=${() => this.onClickMyVillagersButton()}
       >
         ${this.isInMyVillagersList
           ? localize.msg(`${LOCALE_KEY}:isInMyVillagers`)
@@ -96,7 +96,7 @@ export class VillagerInfo extends LocalizeMixin(
         class="wishlist-button
         ${this.showWishlistButton ? null : 'hidden'}"
         data-testid="wishlist-button"
-        @click=${(event) => this.onClickWishlistButton(event)}
+        @click=${() => this.onClickWishlistButton()}
       >
         ${this.isInWishlist
           ? localize.msg(`${LOCALE_KEY}:isInWishlist`)
