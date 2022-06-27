@@ -61,7 +61,10 @@ describe('VillagerInfo', () => {
 
     setTimeout(() => myVillagersButton.click());
 
-    const clickAddMyVillager = await oneEvent(element, 'add-my-villager');
+    const clickAddMyVillager = await oneEvent(
+      element,
+      VillagerInfo.events.add_my_villager
+    );
 
     await expect(clickAddMyVillager).to.exist;
   });
@@ -78,7 +81,10 @@ describe('VillagerInfo', () => {
 
     setTimeout(() => wishlistButton.click());
 
-    const clickAddWishlist = await oneEvent(element, 'add-wishlist');
+    const clickAddWishlist = await oneEvent(
+      element,
+      VillagerInfo.events.add_wishlist
+    );
 
     await expect(clickAddWishlist).to.exist;
   });
