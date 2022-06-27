@@ -1,5 +1,5 @@
 import { visualDiff } from '@web/test-runner-visual-regression';
-import { html, aTimeout, fixture, waitUntil } from '@open-wc/testing';
+import { html, fixture, waitUntil } from '@open-wc/testing';
 
 import { VillagersList } from '../index.js';
 
@@ -50,7 +50,7 @@ describe('VillagersList', () => {
     );
 
     const villagersListEl = element.querySelector('villagers-list');
-    await aTimeout(200);
+    await waitUntil(() => villagersListEl !== null);
 
     const punchyInfo = villagersListEl.shadowRoot.querySelector(
       '[data-testid="villager-info-48"]'
