@@ -68,11 +68,11 @@ export class VillagerInfo extends LocalizeMixin(
   }
 
   onClickMyVillagersButton() {
-    this.dispatchEvent(new CustomEvent('add-my-villager'));
+    this.dispatchEvent(new CustomEvent(VillagerInfo.events.add_my_villager));
   }
 
   onClickWishlistButton() {
-    this.dispatchEvent(new CustomEvent('add-wishlist'));
+    this.dispatchEvent(new CustomEvent(VillagerInfo.events.add_wishlist));
   }
 
   renderMyVillagersButton() {
