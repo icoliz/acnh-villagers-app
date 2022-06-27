@@ -54,8 +54,4 @@ export const styles = css`
   .villager__personality {
     font-size: 12px;
   }
-
-  .hidden {
-    display: none;
-  }
 `;

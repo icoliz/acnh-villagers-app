@@ -76,10 +76,13 @@ export class VillagerInfo extends LocalizeMixin(
   }
 
   renderMyVillagersButton() {
+    if (!this.showMyVillagersButton) {
+      return nothing;
+    }
+
     return html`
       <lion-button
-        class="my-villager-button
-        ${this.showMyVillagersButton ? null : 'hidden'}"
+        class="my-villager-button"
         data-testid="my-villager-button"
         @click=${() => this.onClickMyVillagersButton()}
       >
@@ -91,10 +94,13 @@ export class VillagerInfo extends LocalizeMixin(
   }
 
   renderWishlistButton() {
+    if (!this.showWishlistButton) {
+      return nothing;
+    }
+
     return html`
       <lion-button
-        class="wishlist-button
-        ${this.showWishlistButton ? null : 'hidden'}"
+        class="wishlist-button"
         data-testid="wishlist-button"
         @click=${() => this.onClickWishlistButton()}
       >
