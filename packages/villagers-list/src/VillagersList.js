@@ -31,8 +31,9 @@ export class VillagersList extends ScopedElementsMixin(LitElement) {
     if (this.villagers.length === 0) {
       return nothing;
     }
+
     return html`
-      <ul class="villagers">
+      <ul class="villagers" data-testid="villagers-ul">
         ${this.villagers.map(
           (villager) => html`
             <li>

@@ -49,7 +49,7 @@ describe('VillagersList', () => {
       html`<villagers-list .villagers=${villagers}></villagers-list>`
     );
     const villagerInfo = element.shadowRoot.querySelector(
-      '[data-testid="villager-info"]'
+      '[data-testid="villagers-ul"]'
     );
 
     await expect(villagerInfo).to.exist;
@@ -60,7 +60,7 @@ describe('VillagersList', () => {
       html`<villagers-list></villagers-list>`
     );
     const villagerInfo = element.shadowRoot.querySelector(
-      '[data-testid="villager-info"]'
+      '[data-testid="villagers-ul"]'
     );
 
     await expect(villagerInfo).to.be.null;
