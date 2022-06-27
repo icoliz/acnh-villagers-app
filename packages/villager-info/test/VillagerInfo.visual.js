@@ -1,5 +1,5 @@
 import { visualDiff } from '@web/test-runner-visual-regression';
-import { html, fixture, aTimeout, waitUntil } from '@open-wc/testing';
+import { html, fixture, waitUntil } from '@open-wc/testing';
 
 import { VillagerInfo } from '../index.js';
 
@@ -33,13 +33,7 @@ describe('VillagerInfo', () => {
       <villager-info .villager=${villager}></villager-info>
     `);
 
-    const villagerInfoEl = element.querySelector('villager-info');
-    await aTimeout(200);
-
-    const villagerImg = villagerInfoEl.shadowRoot.querySelector(
-      '[data-testid="villager-img"]'
-    );
-    await waitUntil(() => villagerImg);
+    await waitUntil(() => element.querySelector('villager-info'));
 
     await visualDiff(element, 'villager-info/with-villager');
   });
