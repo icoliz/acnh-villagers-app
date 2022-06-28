@@ -1,15 +1,20 @@
+import { html, fixture } from '@open-wc/testing';
 import { visualDiff } from '@web/test-runner-visual-regression';
 import { AcnhHeader } from '../index.js';
 
-if (!customElements.get('acnh-header')) {
-  customElements.define('acnh-header', AcnhHeader);
-}
-
 describe('AcnhHeader', () => {
-  it('should render header', async () => {
-    const element = document.createElement('acnh-header');
-    document.body.appendChild(element);
+  const scopedElements = { 'acnh-header': AcnhHeader };
+  const scopedFixture = (template) =>
+    fixture(
+      html`<div style="background-color: #fff; padding: 16px">
+        ${template}
+      </div>`,
+      { scopedElements }
+    );
 
-    await visualDiff(element, 'acnh-header');
+  it('should render header', async () => {
+    const element = await scopedFixture(html`<acnh-header></acnh-header>`);
+
+    await visualDiff(element, 'acnh-header/acnh-header');
   });
 });
