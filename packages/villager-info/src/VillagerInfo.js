@@ -67,6 +67,13 @@ export class VillagerInfo extends LocalizeMixin(
     return Object.keys(villager).length === 0;
   }
 
+  getNameLanguage(villager) {
+    if (localize.locale === 'es-ES') {
+      return villager.nameES;
+    }
+    return villager.nameEN;
+  }
+
   onClickMyVillagersButton() {
     this.dispatchEvent(new CustomEvent(VillagerInfo.events.add_my_villager));
   }
@@ -124,8 +131,9 @@ export class VillagerInfo extends LocalizeMixin(
           class="villager__img"
           src=${this.villager.icon}
           data-testid="villager-img"
-          alt="${localize.msg(`${LOCALE_KEY}:imageAltText`)}
-          ${this.villager.nameEN}"
+          alt="${localize.msg(`${LOCALE_KEY}:imageAltText`, {
+            nameLanguage: this.getNameLanguage(this.villager),
+          })}"
         />
         <p class="villager__species">${this.villager.species}</p>
         <p class="villager__personality">

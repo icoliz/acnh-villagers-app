@@ -4,5 +4,5 @@ export default {
   isNotInMyVillagers: 'Añadir a Mis Vecinos',
   isInWishlist: 'Quitar de mi Wishlist',
   isNotInWishlist: 'Añadir a mi Wishlist',
-  imageAltText: 'Imagen de',
+  imageAltText: 'Imagen de {nameLanguage}',
 };
