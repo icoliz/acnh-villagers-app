@@ -10,12 +10,9 @@ export const styles = css`
 
   /* Styles */
   :host {
-    --main-dark: #619c86;
     --main-medium: #86d3bd;
     --main-light: #a0d7c2;
     --main-pale: #c4edd9;
-    --background-light: #e8efdb;
-    --contrast-light: #d4cccc;
   }
 
   .villager {
@@ -39,7 +36,7 @@ export const styles = css`
   }
 
   .villager__nameES {
-    color: #03948a;
+    color: #006961;
     font-weight: 500;
   }
 

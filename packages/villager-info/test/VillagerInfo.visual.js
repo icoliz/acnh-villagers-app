@@ -1,10 +1,7 @@
 import { visualDiff } from '@web/test-runner-visual-regression';
-import { waitUntil } from '@open-wc/testing';
-import { VillagerInfo } from '../index.js';
+import { html, fixture, waitUntil } from '@open-wc/testing';
 
-if (!customElements.get('villager-info')) {
-  customElements.define('villager-info', VillagerInfo);
-}
+import { VillagerInfo } from '../index.js';
 
 const villager = {
   birthday: '17/3',
@@ -22,18 +19,110 @@ const villager = {
 };
 
 describe('VillagerInfo', () => {
-  it("should render a villager's information", async () => {
-    const element = document.createElement('villager-info');
-    element.villager = villager;
-    document.body.appendChild(element);
-    await waitUntil(() => element.villager);
-
-    const villagerImg = element.shadowRoot.querySelector(
-      '[data-testid="villager-img"]'
+  const scopedElements = { 'villager-info': VillagerInfo };
+  const scopedFixture = (template) =>
+    fixture(
+      html`
+        <div style="background-color: #fff; padding: 16px">${template}</div>
+      `,
+      { scopedElements }
     );
 
-    await waitUntil(() => villagerImg);
+  it('should render a villager with buttons', async () => {
+    const element = await scopedFixture(html`
+      <villager-info
+        .villager=${villager}
+        .showWishlistButton=${true}
+        .showMyVillagersButton=${true}
+      ></villager-info>
+    `);
 
-    await visualDiff(element, 'villager-info');
+    await waitUntil(() => element.querySelector('villager-info'));
+
+    await visualDiff(element, 'villager-info/with-villager-all-buttons');
+  });
+
+  it('should render a villager without buttons', async () => {
+    const element = await scopedFixture(html`
+      <villager-info
+        .villager=${villager}
+        .showWishlistButton=${false}
+        .showMyVillagersButton=${false}
+      ></villager-info>
+    `);
+
+    await waitUntil(() => element.querySelector('villager-info'));
+
+    await visualDiff(element, 'villager-info/with-villager-no-buttons');
+  });
+
+  it('should render no villager', async () => {
+    const element = await scopedFixture(html`<villager-info></villager-info>`);
+
+    await visualDiff(element, 'villager-info/without-villager');
+  });
+
+  it('should render a villager with wishlist button - ADD status', async () => {
+    const element = await scopedFixture(
+      html`<villager-info
+        .villager=${villager}
+        .showWishlistButton=${true}
+        .isInWishlist=${false}
+        .showMyVillagersButton=${false}
+      ></villager-info>`
+    );
+
+    await visualDiff(
+      element,
+      'villager-info/with-villager-with-wishlist-button-add'
+    );
+  });
+
+  it('should render a villager with wishlist button - REMOVE status', async () => {
+    const element = await scopedFixture(
+      html`<villager-info
+        .villager=${villager}
+        .showWishlistButton=${true}
+        .isInWishlist=${true}
+        .showMyVillagersButton=${false}
+      ></villager-info>`
+    );
+
+    await visualDiff(
+      element,
+      'villager-info/with-villager-with-wishlist-button-remove'
+    );
+  });
+
+  it('should render a villager with my-villagers button - ADD status', async () => {
+    const element = await scopedFixture(
+      html`<villager-info
+        .villager=${villager}
+        .showWishlistButton=${false}
+        .showMyVillagersButton=${true}
+        .isInMyVillagersList=${false}
+      ></villager-info>`
+    );
+
+    await visualDiff(
+      element,
+      'villager-info/with-villager-with-my-villagers-button-add'
+    );
+  });
+
+  it('should render a villager with my-villagers button - REMOVE status', async () => {
+    const element = await scopedFixture(
+      html`<villager-info
+        .villager=${villager}
+        .showWishlistButton=${false}
+        .showMyVillagersButton=${true}
+        .isInMyVillagersList=${true}
+      ></villager-info>`
+    );
+
+    await visualDiff(
+      element,
+      'villager-info/with-villager-with-my-villagers-button-remove'
+    );
   });
 });
