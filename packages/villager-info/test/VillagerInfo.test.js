@@ -1,4 +1,4 @@
-import { html, fixture, expect, oneEvent } from '@open-wc/testing';
+import { html, fixture, expect, oneEvent, waitUntil } from '@open-wc/testing';
 import { VillagerInfo } from '../index.js';
 
 const villager = {
@@ -49,14 +49,73 @@ describe('VillagerInfo', () => {
     await expect(villagerElement).to.be.null;
   });
 
-  // TODO: to review
+  it('should render villager with wishlist button', async () => {
+    const element = await scopedFixture(
+      html`<villager-info
+        .villager=${villager}
+        .showWishlistButton=${true}
+      ></villager-info>`
+    );
+
+    const wishlistButton = element.shadowRoot.querySelector(
+      '[data-testid="wishlist-button"]'
+    );
+
+    expect(wishlistButton).to.exist;
+  });
+
+  it('should render villager without wishlist button', async () => {
+    const element = await scopedFixture(
+      html`<villager-info
+        .villager=${villager}
+        .showWishlistButton=${false}
+      ></villager-info>`
+    );
+
+    const wishlistButton = element.shadowRoot.querySelector(
+      '[data-testid="wishlist-button"]'
+    );
+
+    expect(wishlistButton).to.be.null;
+  });
+
+  it('should render villager with my-villagers button', async () => {
+    const element = await scopedFixture(
+      html`<villager-info
+        .villager=${villager}
+        .showMyVillagersButton=${true}
+      ></villager-info>`
+    );
+
+    const myVillagersButton = element.shadowRoot.querySelector(
+      '[data-testid="my-villagers-button"]'
+    );
+
+    expect(myVillagersButton).to.exist;
+  });
+
+  it('should render villager without my-villagers button', async () => {
+    const element = await scopedFixture(
+      html`<villager-info
+        .villager=${villager}
+        .showMyVillagersButton=${false}
+      ></villager-info>`
+    );
+
+    const myVillagersButton = element.shadowRoot.querySelector(
+      '[data-testid="my-villagers-button"]'
+    );
+
+    expect(myVillagersButton).to.be.null;
+  });
+
   it('should dispatch add-my-villager event when my villagers button is clicked', async () => {
     const element = await scopedFixture(
       html`<villager-info .villager=${villager}></villager-info>`
     );
 
     const myVillagersButton = element.shadowRoot.querySelector(
-      '[data-testid="my-villager-button"]'
+      '[data-testid="my-villagers-button"]'
     );
 
     setTimeout(() => myVillagersButton.click());
@@ -69,7 +128,6 @@ describe('VillagerInfo', () => {
     await expect(clickAddMyVillager).to.exist;
   });
 
-  // TODO: to review
   it('should dispatch add-wishlist event when wishlist button is clicked', async () => {
     const element = await scopedFixture(
       html`<villager-info .villager=${villager}></villager-info>`

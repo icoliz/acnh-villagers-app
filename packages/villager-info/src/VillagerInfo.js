@@ -82,9 +82,9 @@ export class VillagerInfo extends LocalizeMixin(
 
     return html`
       <lion-button
-        class="my-villager-button"
-        data-testid="my-villager-button"
-        @click=${() => this.onClickMyVillagersButton()}
+        class="my-villagers-button"
+        data-testid="my-villagers-button"
+        @click=${this.onClickMyVillagersButton}
       >
         ${this.isInMyVillagersList
           ? localize.msg(`${LOCALE_KEY}:isInMyVillagers`)
@@ -102,7 +102,7 @@ export class VillagerInfo extends LocalizeMixin(
       <lion-button
         class="wishlist-button"
         data-testid="wishlist-button"
-        @click=${() => this.onClickWishlistButton()}
+        @click=${this.onClickWishlistButton}
       >
         ${this.isInWishlist
           ? localize.msg(`${LOCALE_KEY}:isInWishlist`)
