@@ -49,7 +49,7 @@ export class VillagersFilters extends LocalizeMixin(
   onClickSearchButton(ev) {
     const formData = ev.target.serializedValue;
     this.dispatchEvent(
-      new CustomEvent('click-search-button', {
+      new CustomEvent(VillagersFilters.events.click_search_button, {
         detail: formData['search-input'],
       })
     );
@@ -66,9 +66,9 @@ export class VillagersFilters extends LocalizeMixin(
             placeholder=${localize.msg(`${LOCALE_KEY}:searchInputPlaceholder`)}
             label=${localize.msg(`${LOCALE_KEY}:searchInputLabel`)}
           ></lion-input>
-          <lion-button-submit class="search-button" data-testid="search-button"
-            >${localize.msg(`${LOCALE_KEY}:searchButton`)}</lion-button-submit
-          >
+          <lion-button-submit class="search-button" data-testid="search-button">
+            ${localize.msg(`${LOCALE_KEY}:searchButton`)}
+          </lion-button-submit>
         </form>
       </lion-form>
     `;
