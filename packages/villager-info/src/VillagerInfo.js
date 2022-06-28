@@ -140,8 +140,8 @@ export class VillagerInfo extends LocalizeMixin(
           ${localize.msg(`${LOCALE_KEY}:personality`)}:
           ${this.villager.personality}
         </p>
+        ${this.renderMyVillagersButton()} ${this.renderWishlistButton()}
       </article>
-      ${this.renderMyVillagersButton()} ${this.renderWishlistButton()}
     `;
   }
 }
