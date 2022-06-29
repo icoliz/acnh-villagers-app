@@ -50,13 +50,20 @@ describe('VillagersList', () => {
     );
 
     const villagersListEl = element.querySelector('villagers-list');
-    await waitUntil(() => villagersListEl !== null);
+    await waitUntil(() => villagersListEl);
 
     const punchyInfo = villagersListEl.shadowRoot.querySelector(
       '[data-testid="villager-info-48"]'
     );
     const cheriInfo = villagersListEl.shadowRoot.querySelector(
-      '[data-testid="villager-info-48"]'
+      '[data-testid="villager-info-74"]'
+    );
+
+    await waitUntil(() =>
+      punchyInfo.shadowRoot.querySelector('[data-testid="villager-img"]')
+    );
+    await waitUntil(() =>
+      cheriInfo.shadowRoot.querySelector('[data-testid="villager-img"]')
     );
 
     const punchyImg = punchyInfo.shadowRoot.querySelector(
