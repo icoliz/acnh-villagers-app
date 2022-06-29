@@ -20,32 +20,32 @@ export const styles = css`
   }
 
   .title {
-    width: 100%;
     background-color: var(--main-dark);
     color: var(--background-light);
     font-size: 30px;
     font-weight: 500;
     padding: 20px 5px;
+    width: 100%;
   }
 
   .nav {
+    background-color: var(--main-medium);
     display: flex;
     justify-content: center;
     width: 100%;
-    background-color: var(--main-medium);
   }
 
   .list {
+    align-items: center;
     display: flex;
     flex-direction: row;
-    align-items: center;
     list-style-type: none;
     margin: 10px 0;
   }
 
   .list__item {
-    text-align: center;
     margin: 10px 20px;
+    text-align: center;
   }
 
   .list__item--link {
