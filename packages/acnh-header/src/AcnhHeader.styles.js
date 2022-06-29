@@ -25,7 +25,7 @@ export const styles = css`
     color: var(--background-light);
     font-size: 30px;
     font-weight: 500;
-    padding: 20px 0;
+    padding: 20px 5px;
   }
 
   .nav {
@@ -38,6 +38,7 @@ export const styles = css`
   .list {
     display: flex;
     flex-direction: row;
+    align-items: center;
     list-style-type: none;
     margin: 10px 0;
   }
@@ -48,6 +49,7 @@ export const styles = css`
   }
 
   .list__item--link {
+    display: block;
     padding: 10px;
   }
 `;
