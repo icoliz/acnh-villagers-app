@@ -1,7 +1,7 @@
 import { LitElement, html } from 'lit-element';
 import { ScopedElementsMixin } from '@open-wc/scoped-elements';
 import { LionInput } from '@lion/input';
-import { LionButtonSubmit } from '@lion/button';
+import { LionButtonSubmit, LionButtonReset } from '@lion/button';
 import { LionForm } from '@lion/form';
 import { localize, LocalizeMixin } from '@lion/localize';
 
@@ -15,6 +15,7 @@ export class VillagersFilters extends LocalizeMixin(
   static get scopedElements() {
     return {
       'lion-button-submit': LionButtonSubmit,
+      'lion-button-reset': LionButtonReset,
       'lion-input': LionInput,
       'lion-form': LionForm,
     };
@@ -43,6 +44,7 @@ export class VillagersFilters extends LocalizeMixin(
   static get events() {
     return {
       click_search_button: 'click-search-button',
+      click_reset_button: 'click-reset-button',
     };
   }
 
@@ -52,6 +54,12 @@ export class VillagersFilters extends LocalizeMixin(
       new CustomEvent(VillagersFilters.events.click_search_button, {
         detail: formData['search-input'],
       })
+    );
+  }
+
+  onClickResetButton() {
+    this.dispatchEvent(
+      new CustomEvent(VillagersFilters.events.click_reset_button)
     );
   }
 
@@ -66,9 +74,21 @@ export class VillagersFilters extends LocalizeMixin(
             placeholder=${localize.msg(`${LOCALE_KEY}:searchInputPlaceholder`)}
             label=${localize.msg(`${LOCALE_KEY}:searchInputLabel`)}
           ></lion-input>
-          <lion-button-submit class="search-button" data-testid="search-button">
-            ${localize.msg(`${LOCALE_KEY}:searchButton`)}
-          </lion-button-submit>
+          <div class="buttons">
+            <lion-button-submit
+              class="search-button"
+              data-testid="search-button"
+            >
+              ${localize.msg(`${LOCALE_KEY}:searchButton`)}
+            </lion-button-submit>
+            <lion-button-reset
+              class="reset-button"
+              data-testid="reset-button"
+              @click=${this.onClickResetButton}
+            >
+              ${localize.msg(`${LOCALE_KEY}:resetButton`)}
+            </lion-button-reset>
+          </div>
         </form>
       </lion-form>
     `;

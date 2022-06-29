@@ -25,20 +25,35 @@ export const styles = css`
     border-radius: 10px;
   }
 
-  .search-button {
+  .buttons {
+    display: flex;
+  }
+
+  .search-button,
+  .reset-button {
     display: flex;
     justify-content: center;
     background-color: #007e76;
     color: #fff;
     font-size: 20px;
-    width: 100%;
     height: 45px;
     border-radius: 23px;
     margin-top: 10px;
   }
 
-  .search-button:hover {
+  .search-button {
+    width: 80%;
+  }
+
+  .search-button:hover,
+  .reset-button:hover {
     background-color: #006962;
     border: none;
+  }
+
+  .reset-button {
+    min-width: 80px;
+    width: 20%;
+    margin-left: 10px;
   }
 `;
