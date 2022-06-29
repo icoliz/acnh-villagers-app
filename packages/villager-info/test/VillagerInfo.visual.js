@@ -28,7 +28,7 @@ describe('VillagerInfo', () => {
       { scopedElements }
     );
 
-  it('should render a villager with buttons', async () => {
+  it('should render a villager with wishlist button-ADD and my-villagers button-ADD', async () => {
     const element = await scopedFixture(html`
       <villager-info
         .villager=${villager}
@@ -39,7 +39,122 @@ describe('VillagerInfo', () => {
 
     await waitUntil(() => element.querySelector('villager-info'));
 
-    await visualDiff(element, 'villager-info/with-villager-all-buttons');
+    await visualDiff(
+      element,
+      'villager-info/with-villager-wishlist-ADD-my-villagers-ADD'
+    );
+  });
+
+  it('should render a villager with wishlist button-ADD and my-villagers button-REMOVE', async () => {
+    const element = await scopedFixture(html`
+      <villager-info
+        .villager=${villager}
+        .showWishlistButton=${true}
+        .isInWishlist=${false}
+        .showMyVillagersButton=${true}
+        .isInMyVillagersList=${true}
+      ></villager-info>
+    `);
+
+    await waitUntil(() => element.querySelector('villager-info'));
+
+    await visualDiff(
+      element,
+      'villager-info/with-villager-wishlist-ADD-my-villagers-REMOVE'
+    );
+  });
+
+  it('should render a villager with wishlist button-REMOVE and my-villagers button-ADD', async () => {
+    const element = await scopedFixture(html`
+      <villager-info
+        .villager=${villager}
+        .showWishlistButton=${true}
+        .isInWishlist=${true}
+        .showMyVillagersButton=${true}
+        .isInMyVillagersList=${false}
+      ></villager-info>
+    `);
+
+    await waitUntil(() => element.querySelector('villager-info'));
+
+    await visualDiff(
+      element,
+      'villager-info/with-villager-wishlist-REMOVE-my-villagers-ADD'
+    );
+  });
+
+  it('should render a villager with wishlist button-REMOVE and my-villagers button-REMOVE', async () => {
+    const element = await scopedFixture(html`
+      <villager-info
+        .villager=${villager}
+        .showWishlistButton=${true}
+        .isInWishlist=${true}
+        .showMyVillagersButton=${true}
+        .isInMyVillagersList=${true}
+      ></villager-info>
+    `);
+
+    await waitUntil(() => element.querySelector('villager-info'));
+
+    await visualDiff(
+      element,
+      'villager-info/with-villager-wishlist-REMOVE-my-villagers-REMOVE'
+    );
+  });
+
+  it('should render a villager with wishlist button-ADD ', async () => {
+    const element = await scopedFixture(
+      html`<villager-info
+        .villager=${villager}
+        .showWishlistButton=${true}
+        .isInWishlist=${false}
+        .showMyVillagersButton=${false}
+      ></villager-info>`
+    );
+
+    await visualDiff(element, 'villager-info/with-villager-wishlist-ADD');
+  });
+
+  it('should render a villager with wishlist button-REMOVE', async () => {
+    const element = await scopedFixture(
+      html`<villager-info
+        .villager=${villager}
+        .showWishlistButton=${true}
+        .isInWishlist=${true}
+        .showMyVillagersButton=${false}
+      ></villager-info>`
+    );
+
+    await visualDiff(element, 'villager-info/with-villager-wishlist-REMOVE');
+  });
+
+  it('should render a villager with my-villagers button-ADD', async () => {
+    const element = await scopedFixture(
+      html`<villager-info
+        .villager=${villager}
+        .showWishlistButton=${false}
+        .showMyVillagersButton=${true}
+        .isInMyVillagersList=${false}
+      ></villager-info>`
+    );
+
+    await visualDiff(element, 'villager-info/with-villager-my-villagers-ADD');
+  });
+
+  it('should render a villager with my-villagers button-REMOVE', async () => {
+    const element = await scopedFixture(
+      html`<villager-info
+        .villager=${villager}
+        .showWishlistButton=${false}
+        .showMyVillagersButton=${true}
+        .isInMyVillagersList=${true}
+      ></villager-info>`
+    );
+
+    await visualDiff(
+      element,
+      'villager-info/with-villager-my-villagers-REMOVE'
+    );
   });
 
   it('should render a villager without buttons', async () => {
@@ -60,69 +175,5 @@ describe('VillagerInfo', () => {
     const element = await scopedFixture(html`<villager-info></villager-info>`);
 
     await visualDiff(element, 'villager-info/without-villager');
-  });
-
-  it('should render a villager with wishlist button - ADD status', async () => {
-    const element = await scopedFixture(
-      html`<villager-info
-        .villager=${villager}
-        .showWishlistButton=${true}
-        .isInWishlist=${false}
-        .showMyVillagersButton=${false}
-      ></villager-info>`
-    );
-
-    await visualDiff(
-      element,
-      'villager-info/with-villager-with-wishlist-button-add'
-    );
-  });
-
-  it('should render a villager with wishlist button - REMOVE status', async () => {
-    const element = await scopedFixture(
-      html`<villager-info
-        .villager=${villager}
-        .showWishlistButton=${true}
-        .isInWishlist=${true}
-        .showMyVillagersButton=${false}
-      ></villager-info>`
-    );
-
-    await visualDiff(
-      element,
-      'villager-info/with-villager-with-wishlist-button-remove'
-    );
-  });
-
-  it('should render a villager with my-villagers button - ADD status', async () => {
-    const element = await scopedFixture(
-      html`<villager-info
-        .villager=${villager}
-        .showWishlistButton=${false}
-        .showMyVillagersButton=${true}
-        .isInMyVillagersList=${false}
-      ></villager-info>`
-    );
-
-    await visualDiff(
-      element,
-      'villager-info/with-villager-with-my-villagers-button-add'
-    );
-  });
-
-  it('should render a villager with my-villagers button - REMOVE status', async () => {
-    const element = await scopedFixture(
-      html`<villager-info
-        .villager=${villager}
-        .showWishlistButton=${false}
-        .showMyVillagersButton=${true}
-        .isInMyVillagersList=${true}
-      ></villager-info>`
-    );
-
-    await visualDiff(
-      element,
-      'villager-info/with-villager-with-my-villagers-button-remove'
-    );
   });
 });

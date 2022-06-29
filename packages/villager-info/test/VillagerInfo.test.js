@@ -109,7 +109,7 @@ describe('VillagerInfo', () => {
     expect(myVillagersButton).to.be.null;
   });
 
-  it('should dispatch add-my-villager event when my villagers button is clicked', async () => {
+  it(`should dispatch ${VillagerInfo.events.add_my_villager} event when my villagers button is clicked`, async () => {
     const element = await scopedFixture(
       html`<villager-info .villager=${villager}></villager-info>`
     );
@@ -128,7 +128,7 @@ describe('VillagerInfo', () => {
     await expect(clickAddMyVillager).to.exist;
   });
 
-  it('should dispatch add-wishlist event when wishlist button is clicked', async () => {
+  it(`should dispatch ${VillagerInfo.events.add_wishlist} event when wishlist button is clicked`, async () => {
     const element = await scopedFixture(
       html`<villager-info .villager=${villager}></villager-info>`
     );
