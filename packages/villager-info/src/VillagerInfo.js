@@ -92,11 +92,7 @@ export class VillagerInfo extends LocalizeMixin(
     this.dispatchEvent(new CustomEvent(VillagerInfo.events.remove_my_villager));
   }
 
-  renderMyVillagersButton() {
-    if (!this.showMyVillagersButton) {
-      return nothing;
-    }
-
+  renderAddOrRemoveMyVillagers() {
     if (this.isInMyVillagersList) {
       return html`
         <lion-button
@@ -120,11 +116,15 @@ export class VillagerInfo extends LocalizeMixin(
     `;
   }
 
-  renderWishlistButton() {
-    if (!this.showWishlistButton) {
+  renderMyVillagersButton() {
+    if (!this.showMyVillagersButton) {
       return nothing;
     }
 
+    return this.renderAddOrRemoveMyVillagers();
+  }
+
+  renderAddOrRemoveWishlist() {
     if (this.isInWishlist) {
       return html`
         <lion-button
@@ -146,6 +146,14 @@ export class VillagerInfo extends LocalizeMixin(
         ${localize.msg(`${LOCALE_KEY}:isNotInWishlist`)}
       </lion-button>
     `;
+  }
+
+  renderWishlistButton() {
+    if (!this.showWishlistButton) {
+      return nothing;
+    }
+
+    return this.renderAddOrRemoveWishlist();
   }
 
   render() {
