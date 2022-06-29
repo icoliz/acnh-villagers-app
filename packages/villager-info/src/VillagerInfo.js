@@ -101,7 +101,7 @@ export class VillagerInfo extends LocalizeMixin(
       return html`
         <lion-button
           class="my-villagers-button"
-          data-testid="my-villagers-button"
+          data-testid="my-villagers-button-remove"
           @click=${this.onClickRemoveMyVillagersButton}
         >
           ${localize.msg(`${LOCALE_KEY}:isInMyVillagers`)}
@@ -112,7 +112,7 @@ export class VillagerInfo extends LocalizeMixin(
     return html`
       <lion-button
         class="my-villagers-button"
-        data-testid="my-villagers-button"
+        data-testid="my-villagers-button-add"
         @click=${this.onClickAddMyVillagersButton}
       >
         ${localize.msg(`${LOCALE_KEY}:isNotInMyVillagers`)}
@@ -129,7 +129,7 @@ export class VillagerInfo extends LocalizeMixin(
       return html`
         <lion-button
           class="wishlist-button"
-          data-testid="wishlist-button"
+          data-testid="wishlist-button-remove"
           @click=${this.onClickRemoveWishlistButton}
         >
           ${localize.msg(`${LOCALE_KEY}:isInWishlist`)}
@@ -140,7 +140,7 @@ export class VillagerInfo extends LocalizeMixin(
     return html`
       <lion-button
         class="wishlist-button"
-        data-testid="wishlist-button"
+        data-testid="wishlist-button-add"
         @click=${this.onClickAddWishlistButton}
       >
         ${localize.msg(`${LOCALE_KEY}:isNotInWishlist`)}
