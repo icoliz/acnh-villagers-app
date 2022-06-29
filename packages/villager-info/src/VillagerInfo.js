@@ -38,8 +38,10 @@ export class VillagerInfo extends LocalizeMixin(
 
   static get events() {
     return {
-      add_my_villager: 'add-my-villager',
       add_wishlist: 'add-wishlist',
+      remove_wishlist: 'remove-wishlist',
+      add_my_villager: 'add-my-villager',
+      remove_my_villager: 'remove-my-villager',
     };
   }
 
@@ -74,12 +76,20 @@ export class VillagerInfo extends LocalizeMixin(
     return villager.nameEN;
   }
 
-  onClickMyVillagersButton() {
+  onClickAddWishlistButton() {
+    this.dispatchEvent(new CustomEvent(VillagerInfo.events.add_wishlist));
+  }
+
+  onClickRemoveWishlistButton() {
+    this.dispatchEvent(new CustomEvent(VillagerInfo.events.remove_wishlist));
+  }
+
+  onClickAddMyVillagersButton() {
     this.dispatchEvent(new CustomEvent(VillagerInfo.events.add_my_villager));
   }
 
-  onClickWishlistButton() {
-    this.dispatchEvent(new CustomEvent(VillagerInfo.events.add_wishlist));
+  onClickRemoveMyVillagersButton() {
+    this.dispatchEvent(new CustomEvent(VillagerInfo.events.remove_my_villager));
   }
 
   renderMyVillagersButton() {
@@ -87,15 +97,25 @@ export class VillagerInfo extends LocalizeMixin(
       return nothing;
     }
 
+    if (this.isInMyVillagersList) {
+      return html`
+        <lion-button
+          class="my-villagers-button"
+          data-testid="my-villagers-button"
+          @click=${this.onClickRemoveMyVillagersButton}
+        >
+          ${localize.msg(`${LOCALE_KEY}:isInMyVillagers`)}
+        </lion-button>
+      `;
+    }
+
     return html`
       <lion-button
         class="my-villagers-button"
         data-testid="my-villagers-button"
-        @click=${this.onClickMyVillagersButton}
+        @click=${this.onClickAddMyVillagersButton}
       >
-        ${this.isInMyVillagersList
-          ? localize.msg(`${LOCALE_KEY}:isInMyVillagers`)
-          : localize.msg(`${LOCALE_KEY}:isNotInMyVillagers`)}
+        ${localize.msg(`${LOCALE_KEY}:isNotInMyVillagers`)}
       </lion-button>
     `;
   }
@@ -105,15 +125,25 @@ export class VillagerInfo extends LocalizeMixin(
       return nothing;
     }
 
+    if (this.isInWishlist) {
+      return html`
+        <lion-button
+          class="wishlist-button"
+          data-testid="wishlist-button"
+          @click=${this.onClickRemoveWishlistButton}
+        >
+          ${localize.msg(`${LOCALE_KEY}:isInWishlist`)}
+        </lion-button>
+      `;
+    }
+
     return html`
       <lion-button
         class="wishlist-button"
         data-testid="wishlist-button"
-        @click=${this.onClickWishlistButton}
+        @click=${this.onClickAddWishlistButton}
       >
-        ${this.isInWishlist
-          ? localize.msg(`${LOCALE_KEY}:isInWishlist`)
-          : localize.msg(`${LOCALE_KEY}:isNotInWishlist`)}
+        ${localize.msg(`${LOCALE_KEY}:isNotInWishlist`)}
       </lion-button>
     `;
   }
@@ -140,7 +170,7 @@ export class VillagerInfo extends LocalizeMixin(
           ${localize.msg(`${LOCALE_KEY}:personality`)}:
           ${this.villager.personality}
         </p>
-        ${this.renderMyVillagersButton()} ${this.renderWishlistButton()}
+        ${this.renderWishlistButton()} ${this.renderMyVillagersButton()}
       </article>
     `;
   }
