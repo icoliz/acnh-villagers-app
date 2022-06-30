@@ -55,22 +55,4 @@ describe('VillagersFilters', () => {
 
     expect(clickResetButton).to.exist;
   });
-
-  it('should reset user input when clicking on the reset button', async () => {
-    const element = await scopedFixture(
-      html`<villagers-filters></villagers-filters>`
-    );
-
-    const searchInput = element.shadowRoot.querySelector(
-      '[data-testid="search-input"]'
-    );
-    const resetButton = element.shadowRoot.querySelector(
-      '[data-testid="reset-button"]'
-    );
-
-    searchInput.modelValue = 'Cheri';
-    resetButton.click();
-
-    expect(searchInput.modelValue).to.be.equal('');
-  });
 });
