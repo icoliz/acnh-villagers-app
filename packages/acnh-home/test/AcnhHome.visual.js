@@ -73,6 +73,6 @@ describe('AcnhHome', () => {
 
     await waitUntil(() => villagerImg);
 
-    await visualDiff(element, 'acnh-home');
+    await visualDiff(element, 'acnh-home/acnh-home');
   });
 });
