@@ -31,13 +31,16 @@ export class AcnhHome extends ScopedElementsMixin(LitElement) {
     this.villagersToRender = [];
   }
 
+  setVillagersData = async () => {
+    const response = await getVillagers();
+    this.__villagers = response;
+    this.villagersToRender = response;
+  };
+
   connectedCallback() {
     super.connectedCallback();
 
-    getVillagers().then((result) => {
-      this.__villagers = result;
-      this.villagersToRender = result;
-    });
+    this.setVillagersData();
   }
 
   clickSearchButton(inputValue) {
