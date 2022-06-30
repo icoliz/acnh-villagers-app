@@ -20,36 +20,35 @@ export class AcnhHome extends ScopedElementsMixin(LitElement) {
 
   static get properties() {
     return {
-      villagers: { type: Array },
-      filteredVillagers: { type: Array },
+      villagersToRender: { type: Array },
     };
   }
 
   constructor() {
     super();
 
-    this.villagers = [];
-    this.filteredVillagers = [];
+    this.__villagers = [];
+    this.villagersToRender = [];
   }
 
   connectedCallback() {
     super.connectedCallback();
 
     getVillagers().then((result) => {
-      this.villagers = result;
-      this.filteredVillagers = result;
+      this.__villagers = result;
+      this.villagersToRender = result;
     });
   }
 
   clickSearchButton(inputValue) {
     const search = inputValue.detail.toLowerCase();
 
-    this.filteredVillagers = this.villagers.filter(
+    this.villagersToRender = this.__villagers.filter(
       (villager) =>
         villager.nameEN.toLowerCase().includes(search) ||
         villager.nameES.toLowerCase().includes(search)
     );
-    return this.filteredVillagers;
+    return this.villagersToRender;
   }
 
   render() {
@@ -58,12 +57,11 @@ export class AcnhHome extends ScopedElementsMixin(LitElement) {
         <h2 class="subtitle">All villagers information</h2>
         <villagers-filters
           class="villagers-filters"
-          .villagers=${this.villagers}
           @click-search-button=${this.clickSearchButton}
         ></villagers-filters>
       </div>
       <villagers-list
-        .villagers=${this.filteredVillagers}
+        .villagers=${this.villagersToRender}
         data-testid="villagers-list"
       ></villagers-list>
     `;
