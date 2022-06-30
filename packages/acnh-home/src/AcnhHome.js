@@ -54,6 +54,10 @@ export class AcnhHome extends ScopedElementsMixin(LitElement) {
     return this.villagersToRender;
   }
 
+  clickResetButton() {
+    this.villagersToRender = this.__villagers;
+  }
+
   render() {
     return html`
       <div class="home">
@@ -61,6 +65,7 @@ export class AcnhHome extends ScopedElementsMixin(LitElement) {
         <villagers-filters
           class="villagers-filters"
           @click-search-button=${this.clickSearchButton}
+          @click-reset-button=${this.clickResetButton}
         ></villagers-filters>
       </div>
       <villagers-list
