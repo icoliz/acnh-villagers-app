@@ -92,19 +92,19 @@ export class VillagerInfo extends LocalizeMixin(
     this.dispatchEvent(new CustomEvent(VillagerInfo.events.remove_my_villager));
   }
 
-  renderAddOrRemoveMyVillagers() {
-    if (this.isInMyVillagersList) {
-      return html`
-        <lion-button
-          class="my-villagers-button"
-          data-testid="my-villagers-button-remove"
-          @click=${this.onClickRemoveMyVillagersButton}
-        >
-          ${localize.msg(`${LOCALE_KEY}:isInMyVillagers`)}
-        </lion-button>
-      `;
-    }
+  renderAddMyVillagersButton() {
+    return html`
+      <lion-button
+        class="my-villagers-button"
+        data-testid="my-villagers-button-remove"
+        @click=${this.onClickRemoveMyVillagersButton}
+      >
+        ${localize.msg(`${LOCALE_KEY}:isInMyVillagers`)}
+      </lion-button>
+    `;
+  }
 
+  renderRemoveMyVillagersButton() {
     return html`
       <lion-button
         class="my-villagers-button"
@@ -121,22 +121,26 @@ export class VillagerInfo extends LocalizeMixin(
       return nothing;
     }
 
-    return this.renderAddOrRemoveMyVillagers();
-  }
-
-  renderAddOrRemoveWishlist() {
-    if (this.isInWishlist) {
-      return html`
-        <lion-button
-          class="wishlist-button"
-          data-testid="wishlist-button-remove"
-          @click=${this.onClickRemoveWishlistButton}
-        >
-          ${localize.msg(`${LOCALE_KEY}:isInWishlist`)}
-        </lion-button>
-      `;
+    if (this.isInMyVillagersList) {
+      return this.renderAddMyVillagersButton();
     }
 
+    return this.renderRemoveMyVillagersButton();
+  }
+
+  renderAddWishlistButton() {
+    return html`
+      <lion-button
+        class="wishlist-button"
+        data-testid="wishlist-button-remove"
+        @click=${this.onClickRemoveWishlistButton}
+      >
+        ${localize.msg(`${LOCALE_KEY}:isInWishlist`)}
+      </lion-button>
+    `;
+  }
+
+  renderRemoveWishlistButton() {
     return html`
       <lion-button
         class="wishlist-button"
@@ -153,7 +157,10 @@ export class VillagerInfo extends LocalizeMixin(
       return nothing;
     }
 
-    return this.renderAddOrRemoveWishlist();
+    if (this.isInWishlist) {
+      return this.renderAddWishlistButton();
+    }
+    return this.renderRemoveWishlistButton();
   }
 
   render() {
