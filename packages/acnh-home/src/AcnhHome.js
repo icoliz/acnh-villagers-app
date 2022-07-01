@@ -2,7 +2,7 @@ import { LitElement, html } from 'lit-element';
 import { ScopedElementsMixin } from '@open-wc/scoped-elements';
 
 import { styles } from './AcnhHome.styles.js';
-import { getVillagers } from '../../../services/getVillagers.js';
+import { acnhApi } from '../../../services/getVillagers.js';
 import { VillagersFilters } from '../../villagers-filters/index.js';
 import { VillagersList } from '../../villagers-list/index.js';
 
@@ -27,15 +27,9 @@ export class AcnhHome extends ScopedElementsMixin(LitElement) {
   constructor() {
     super();
 
-    this.__villagers = [];
+    this.__allVillagers = [];
     this.villagersToRender = [];
   }
-
-  setVillagersData = async () => {
-    const response = await getVillagers();
-    this.__villagers = response;
-    this.villagersToRender = response;
-  };
 
   connectedCallback() {
     super.connectedCallback();
@@ -43,19 +37,24 @@ export class AcnhHome extends ScopedElementsMixin(LitElement) {
     this.setVillagersData();
   }
 
+  setVillagersData = async () => {
+    const response = await acnhApi.getVillagers();
+    this.__allVillagers = response;
+    this.villagersToRender = response;
+  };
+
   clickSearchButton(inputValue) {
     const search = inputValue.detail.toLowerCase();
 
-    this.villagersToRender = this.__villagers.filter(
+    this.villagersToRender = this.__allVillagers.filter(
       (villager) =>
         villager.nameEN.toLowerCase().includes(search) ||
         villager.nameES.toLowerCase().includes(search)
     );
-    return this.villagersToRender;
   }
 
   clickResetButton() {
-    this.villagersToRender = this.__villagers;
+    this.villagersToRender = this.__allVillagers;
   }
 
   render() {
@@ -64,6 +63,7 @@ export class AcnhHome extends ScopedElementsMixin(LitElement) {
         <h2 class="subtitle">All villagers information</h2>
         <villagers-filters
           class="villagers-filters"
+          data-testid="villagers-filters"
           @click-search-button=${this.clickSearchButton}
           @click-reset-button=${this.clickResetButton}
         ></villagers-filters>
