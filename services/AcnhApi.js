@@ -3,7 +3,7 @@ import { ajax } from '@lion/ajax';
 export const VILLAGERS_ENDPOINT = 'http://acnhapi.com/v1/villagers/';
 
 export class AcnhApi {
-  filterVillagersData = (data) => {
+  __filterVillagersData(data) {
     return data.map((villager) => ({
       id: villager.id,
       nameEN: villager.name['name-EUen'],
@@ -18,21 +18,21 @@ export class AcnhApi {
       icon: villager.icon_uri,
       image: villager.image_uri,
     }));
-  };
+  }
 
-  getVillagers = async () => {
+  async getVillagers() {
     try {
       const response = await ajax.fetch(`${VILLAGERS_ENDPOINT}`);
       const dataApi = await response.json();
 
       const dataApiArray = Object.values(dataApi);
 
-      const villagers = this.filterVillagersData(dataApiArray);
+      const villagers = this.__filterVillagersData(dataApiArray);
       return villagers;
     } catch (error) {
       return null;
     }
-  };
+  }
 }
 
 export const acnhApi = new AcnhApi();

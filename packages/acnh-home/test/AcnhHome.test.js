@@ -2,12 +2,11 @@ import { html, fixture, expect } from '@open-wc/testing';
 import { createSandbox } from 'sinon';
 
 import { AcnhHome } from '../index.js';
-import { villagers_mock } from './mocks.js';
+import { villagers_mock } from '../../../services/mocks.js';
 import { VillagersFilters } from '../../villagers-filters/index.js';
-import { acnhApi } from '../../../services/getVillagers.js';
+import { AcnhApi } from '../../../services/AcnhApi.js';
 
 let sandbox;
-let stub;
 
 describe('AcnhHome', () => {
   const scopedElements = { 'acnh-home': AcnhHome };
@@ -15,7 +14,7 @@ describe('AcnhHome', () => {
 
   beforeEach(() => {
     sandbox = createSandbox();
-    stub = sandbox.stub(acnhApi, 'getVillagers').resolves(villagers_mock);
+    sandbox.stub(AcnhApi.prototype, 'getVillagers').resolves(villagers_mock);
   });
 
   afterEach(() => {
@@ -28,7 +27,13 @@ describe('AcnhHome', () => {
     expect(element).to.be.accessible();
   });
 
-  it(`should find villagers whose name includes given input when ${VillagersFilters.events.click_search_button} is fired`, async () => {
+  it(`should call villagers correctly`, async () => {
+    const element = await scopedFixture(html`<acnh-home></acnh-home>`);
+
+    expect(element.villagersToRender).to.be.deep.equal(villagers_mock);
+  });
+
+  it(`should find villagers whose name includes given input (English) when ${VillagersFilters.events.click_search_button} is fired`, async () => {
     const element = await scopedFixture(html`<acnh-home></acnh-home>`);
 
     const villagersFiltersEl = element.shadowRoot.querySelector(
@@ -37,14 +42,14 @@ describe('AcnhHome', () => {
 
     villagersFiltersEl.dispatchEvent(
       new CustomEvent(VillagersFilters.events.click_search_button, {
-        detail: 'Cheri',
+        detail: villagers_mock[1].nameEN,
       })
     );
 
-    // expect
+    expect(element.villagersToRender).to.be.deep.equal([villagers_mock[1]]);
   });
 
-  xit(`should reset search when ${VillagersFilters.events.click_reset_button} event is fired`, async () => {
+  it(`should find villagers whose name includes given input (Spanish) when ${VillagersFilters.events.click_search_button} is fired`, async () => {
     const element = await scopedFixture(html`<acnh-home></acnh-home>`);
 
     const villagersFiltersEl = element.shadowRoot.querySelector(
@@ -52,9 +57,31 @@ describe('AcnhHome', () => {
     );
 
     villagersFiltersEl.dispatchEvent(
+      new CustomEvent(VillagersFilters.events.click_search_button, {
+        detail: villagers_mock[1].nameES,
+      })
+    );
+
+    expect(element.villagersToRender).to.be.deep.equal([villagers_mock[1]]);
+  });
+
+  it(`should reset search when ${VillagersFilters.events.click_reset_button} event is fired`, async () => {
+    const element = await scopedFixture(html`<acnh-home></acnh-home>`);
+
+    const villagersFiltersEl = element.shadowRoot.querySelector(
+      '[data-testid="villagers-filters"]'
+    );
+
+    villagersFiltersEl.dispatchEvent(
+      new CustomEvent(VillagersFilters.events.click_search_button, {
+        detail: villagers_mock[0].nameES,
+      })
+    );
+
+    villagersFiltersEl.dispatchEvent(
       new CustomEvent(VillagersFilters.events.click_reset_button)
     );
 
-    // expect(element.villagers).to.be.deep.equal(villagers);
+    expect(element.villagersToRender).to.be.deep.equal(villagers_mock);
   });
 });

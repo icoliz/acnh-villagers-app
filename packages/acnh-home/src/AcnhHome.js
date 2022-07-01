@@ -2,7 +2,7 @@ import { LitElement, html } from 'lit-element';
 import { ScopedElementsMixin } from '@open-wc/scoped-elements';
 
 import { styles } from './AcnhHome.styles.js';
-import { acnhApi } from '../../../services/getVillagers.js';
+import { acnhApi } from '../../../services/AcnhApi.js';
 import { VillagersFilters } from '../../villagers-filters/index.js';
 import { VillagersList } from '../../villagers-list/index.js';
 
