@@ -2,7 +2,7 @@ import { html, fixture, expect } from '@open-wc/testing';
 import { createSandbox } from 'sinon';
 
 import { AcnhHome } from '../index.js';
-import { villagers_mock } from '../../../services/mocks.js';
+import { villagers_mock } from './mocks.js';
 import { VillagersFilters } from '../../villagers-filters/index.js';
 import { AcnhApi } from '../../../services/AcnhApi.js';
 

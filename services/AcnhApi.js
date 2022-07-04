@@ -4,7 +4,9 @@ export const VILLAGERS_ENDPOINT = 'http://acnhapi.com/v1/villagers/';
 
 export class AcnhApi {
   __filterVillagersData(data) {
-    return data.map((villager) => ({
+    const dataArray = Object.values(data);
+
+    return dataArray.map((villager) => ({
       id: villager.id,
       nameEN: villager.name['name-EUen'],
       nameES: villager.name['name-EUes'],
@@ -25,9 +27,7 @@ export class AcnhApi {
       const response = await ajax.fetch(`${VILLAGERS_ENDPOINT}`);
       const dataApi = await response.json();
 
-      const dataApiArray = Object.values(dataApi);
-
-      const villagers = this.__filterVillagersData(dataApiArray);
+      const villagers = this.__filterVillagersData(dataApi);
       return villagers;
     } catch (error) {
       return null;
