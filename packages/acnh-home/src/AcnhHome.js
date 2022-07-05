@@ -5,8 +5,11 @@ import { styles } from './AcnhHome.styles.js';
 import { acnhApi } from '../../../services/AcnhApi.js';
 import { VillagersFilters } from '../../villagers-filters/index.js';
 import { VillagersList } from '../../villagers-list/index.js';
+import { LocalStorageController } from '../../controller/test/local-storage.js';
 
 export class AcnhHome extends ScopedElementsMixin(LitElement) {
+  controller = new LocalStorageController(this);
+
   static get scopedElements() {
     return {
       'villagers-filters': VillagersFilters,
@@ -27,20 +30,25 @@ export class AcnhHome extends ScopedElementsMixin(LitElement) {
   constructor() {
     super();
 
-    this.__allVillagers = [];
-    this.villagersToRender = [];
+    this.__allVillagers = this.controller.get('allVillagers', []);
+    this.villagersToRender = this.controller.get('allVillagers', []);
   }
 
   connectedCallback() {
     super.connectedCallback();
 
-    this.setVillagersData();
+    if (this.controller.get('allVillagers') === undefined) {
+      this.setVillagersData();
+    }
   }
 
   setVillagersData = async () => {
     const response = await acnhApi.getVillagers();
+
     this.__allVillagers = response;
     this.villagersToRender = response;
+
+    this.controller.set('allVillagers', response);
   };
 
   clickSearchButton(inputValue) {
