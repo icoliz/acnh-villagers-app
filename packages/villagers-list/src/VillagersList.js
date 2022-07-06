@@ -29,44 +29,62 @@ export class VillagersList extends ScopedElementsMixin(LitElement) {
 
     this.villagers = [];
     this.wishlist = this.controller.get('wishlist', []);
+    this.myVillagers = this.controller.get('my-villagers', []);
   }
 
-  isVillagerInWishlist(selectedVillager) {
-    const villagerInWishlist = this.wishlist.find(
+  isVillagerInList(selectedVillager, list) {
+    const villagerInList = list.find(
       (villager) => villager.id === selectedVillager.id
     );
 
-    if (villagerInWishlist !== undefined) {
+    if (villagerInList !== undefined) {
       return true;
     }
     return false;
   }
 
   addWishlist(clickedVillager) {
-    if (!this.isVillagerInWishlist(clickedVillager)) {
+    if (!this.isVillagerInList(clickedVillager, this.wishlist)) {
       this.wishlist = [...this.wishlist, clickedVillager];
       this.controller.set('wishlist', this.wishlist);
-    }
 
-    this.requestUpdate();
+      this.requestUpdate();
+    }
   }
 
   removeWishlist(clickedVillager) {
-    console.log(
-      `clicked remove from wishlist, villager id: ${clickedVillager.id}`
-    );
+    if (this.isVillagerInList(clickedVillager, this.wishlist)) {
+      const villagerIndex = this.wishlist.findIndex(
+        (villager) => villager.id === clickedVillager.id
+      );
+
+      this.wishlist.splice(villagerIndex, 1);
+      this.controller.set('wishlist', this.wishlist);
+
+      this.requestUpdate();
+    }
   }
 
   addMyVillager(clickedVillager) {
-    console.log(
-      `clicked add to my villagers, villager id: ${clickedVillager.id}`
-    );
+    if (!this.isVillagerInList(clickedVillager, this.myVillagers)) {
+      this.myVillagers = [...this.myVillagers, clickedVillager];
+      this.controller.set('my-villagers', this.myVillagers);
+
+      this.requestUpdate();
+    }
   }
 
   removeMyVillager(clickedVillager) {
-    console.log(
-      `clicked remove from my villagers, villager id: ${clickedVillager.id}`
-    );
+    if (this.isVillagerInList(clickedVillager, this.myVillagers)) {
+      const villagerIndex = this.myVillagers.findIndex(
+        (villager) => villager.id === clickedVillager.id
+      );
+
+      this.myVillagers.splice(villagerIndex, 1);
+      this.controller.set('my-villagers', this.myVillagers);
+
+      this.requestUpdate();
+    }
   }
 
   render() {
@@ -87,9 +105,12 @@ export class VillagersList extends ScopedElementsMixin(LitElement) {
                 @add-my-villager=${() => this.addMyVillager(villager)}
                 @remove-my-villager=${() => this.removeMyVillager(villager)}
                 .showWishlistButton=${true}
-                .isInWishlist=${this.isVillagerInWishlist(villager)}
+                .isInWishlist=${this.isVillagerInList(villager, this.wishlist)}
                 .showMyVillagersButton=${true}
-                .isInMyVillagersList=${false}
+                .isInMyVillagersList=${this.isVillagerInList(
+                  villager,
+                  this.myVillagers
+                )}
               ></villager-info>
             </li>
           `
