@@ -22,6 +22,8 @@ export class AcnhHome extends ScopedElementsMixin(LitElement) {
     return {
       villagers: { type: Array },
       filteredVillagers: { type: Array },
+      showWishlistButton: { type: Boolean },
+      showMyVillagersButton: { type: Boolean },
     };
   }
 
@@ -30,6 +32,8 @@ export class AcnhHome extends ScopedElementsMixin(LitElement) {
 
     this.villagers = [];
     this.filteredVillagers = [];
+    this.showWishlistButton = true;
+    this.showMyVillagersButton = true;
   }
 
   connectedCallback() {
@@ -65,6 +69,8 @@ export class AcnhHome extends ScopedElementsMixin(LitElement) {
       <villagers-list
         .villagers=${this.filteredVillagers}
         data-testid="villagers-list"
+        .showWishlistButton=${this.showWishlistButton}
+        .showMyVillagersButton=${this.showMyVillagersButton}
       ></villagers-list>
     `;
   }

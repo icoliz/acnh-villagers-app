@@ -21,6 +21,8 @@ export class VillagersList extends ScopedElementsMixin(LitElement) {
   static get properties() {
     return {
       villagers: { type: Array },
+      showWishlistButton: { type: Boolean },
+      showMyVillagersButton: { type: Boolean },
     };
   }
 
@@ -30,6 +32,8 @@ export class VillagersList extends ScopedElementsMixin(LitElement) {
     this.villagers = [];
     this.wishlist = this.controller.get('wishlist', []);
     this.myVillagers = this.controller.get('my-villagers', []);
+    this.showWishlistButton = true;
+    this.showMyVillagersButton = true;
   }
 
   isVillagerInList(selectedVillager, list) {
@@ -104,13 +108,13 @@ export class VillagersList extends ScopedElementsMixin(LitElement) {
                 @remove-wishlist=${() => this.removeWishlist(villager)}
                 @add-my-villager=${() => this.addMyVillager(villager)}
                 @remove-my-villager=${() => this.removeMyVillager(villager)}
-                .showWishlistButton=${true}
                 .isInWishlist=${this.isVillagerInList(villager, this.wishlist)}
-                .showMyVillagersButton=${true}
                 .isInMyVillagersList=${this.isVillagerInList(
                   villager,
                   this.myVillagers
                 )}
+                .showWishlistButton=${this.showWishlistButton}
+                .showMyVillagersButton=${this.showMyVillagersButton}
               ></villager-info>
             </li>
           `
