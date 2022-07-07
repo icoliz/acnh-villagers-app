@@ -1,4 +1,4 @@
-import { html, fixture, expect } from '@open-wc/testing';
+import { html, fixture, expect, waitUntil } from '@open-wc/testing';
 import { spy } from 'sinon';
 
 import { VillagersList } from '../index.js';
@@ -10,8 +10,8 @@ describe('VillagersList', () => {
   const scopedFixture = (template) => fixture(template, { scopedElements });
 
   let setLocalStorageSpy;
-  let wishlist;
-  let myVillagers;
+  let wishlist = [];
+  let myVillagers = [];
 
   beforeEach(() => {
     wishlist = wishlist_mock.slice(0);
@@ -52,7 +52,7 @@ describe('VillagersList', () => {
       '[data-testid="villagers-ul"]'
     );
 
-    await expect(villagerInfo).to.be.null;
+    expect(villagerInfo).to.be.null;
   });
 
   // TODO: review tests from this point
@@ -196,5 +196,123 @@ describe('VillagersList', () => {
     expect(requestUpdateSpy.called).to.be.true;
   });
 
-  //myVillagers
+  //myVillagers -- add villager to myVillagers
+  it('should add villager to myVillagers if the villager is not saved in list', async () => {
+    const element = await scopedFixture(
+      html`<villagers-list
+        .villagers=${villagers}
+        .myVillagers=${myVillagers}
+      ></villagers-list>`
+    );
+
+    const villagerInfo = element.shadowRoot.querySelector(
+      `[data-testid="villager-info-74"]`
+    );
+
+    villagerInfo.dispatchEvent(
+      new CustomEvent(VillagerInfo.events.add_my_villager)
+    );
+
+    expect(element.myVillagers.length).to.be.equal(3);
+  });
+
+  it('should call local storage to set myVillagers if the villager is not saved in list', async () => {
+    const element = await scopedFixture(
+      html`<villagers-list
+        .villagers=${villagers}
+        .myVillagers=${myVillagers}
+      ></villagers-list>`
+    );
+
+    const villagerInfo = element.shadowRoot.querySelector(
+      `[data-testid="villager-info-74"]`
+    );
+
+    villagerInfo.dispatchEvent(
+      new CustomEvent(VillagerInfo.events.add_my_villager)
+    );
+
+    expect(setLocalStorageSpy.called).to.be.true;
+  });
+
+  it('should trigger an update if the villager is not saved in list', async () => {
+    const element = await scopedFixture(
+      html`<villagers-list
+        .villagers=${villagers}
+        .myVillagers=${myVillagers}
+      ></villagers-list>`
+    );
+
+    const villagerInfo = element.shadowRoot.querySelector(
+      `[data-testid="villager-info-74"]`
+    );
+
+    const requestUpdateSpy = spy(element, 'requestUpdate');
+
+    villagerInfo.dispatchEvent(
+      new CustomEvent(VillagerInfo.events.add_my_villager)
+    );
+
+    expect(requestUpdateSpy.called).to.be.true;
+  });
+
+  //myVillagers -- remove villager from myVillagers
+  it('should remove a villager from myVillagers if it is already in it', async () => {
+    const element = await scopedFixture(
+      html`<villagers-list
+        .villagers=${villagers}
+        .myVillagers=${myVillagers}
+      ></villagers-list>`
+    );
+
+    const villagerInfo = element.shadowRoot.querySelector(
+      `[data-testid="villager-info-48"]`
+    );
+
+    villagerInfo.dispatchEvent(
+      new CustomEvent(VillagerInfo.events.remove_my_villager)
+    );
+
+    expect(element.myVillagers.length).to.be.equal(1);
+  });
+
+  it('should call local storage to set myVillagers if the the villager is already saved in list', async () => {
+    const element = await scopedFixture(
+      html`<villagers-list
+        .villagers=${villagers}
+        .myVillagers=${myVillagers}
+      ></villagers-list>`
+    );
+
+    const villagerInfo = element.shadowRoot.querySelector(
+      `[data-testid="villager-info-48"]`
+    );
+
+    villagerInfo.dispatchEvent(
+      new CustomEvent(VillagerInfo.events.remove_my_villager)
+    );
+
+    expect(setLocalStorageSpy.called).to.be.true;
+  });
+
+  it('should trigger an update if the villager is already saved in list', async () => {
+    const element = await scopedFixture(
+      html`<villagers-list
+        .villagers=${villagers}
+        .myVillagers=${myVillagers}
+      ></villagers-list>`
+    );
+
+    const villagerInfo = element.shadowRoot.querySelector(
+      `[data-testid="villager-info-48"]`
+    );
+
+    const requestUpdateSpy = spy(element, 'requestUpdate');
+
+    villagerInfo.dispatchEvent(
+      new CustomEvent(VillagerInfo.events.remove_my_villager)
+    );
+
+    expect(requestUpdateSpy.called).to.be.true;
+  });
 });
