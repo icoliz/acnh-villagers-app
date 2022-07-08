@@ -6,6 +6,7 @@ import { styles } from './AcnhApp.styles.js';
 import { AcnhHeader } from '../../acnh-header/index.js';
 import { AcnhMain } from '../../acnh-main/index.js';
 import { AcnhHome } from '../../acnh-home/index.js';
+import { MyVillagers } from '../../my-villagers/index.js';
 import { AcnhFooter } from '../../acnh-footer/index.js';
 import { Link } from '../../app-link/index.js';
 
@@ -15,6 +16,7 @@ export class AcnhApp extends router(ScopedElementsMixin(LitElement)) {
       'acnh-header': AcnhHeader,
       'acnh-main': AcnhMain,
       'acnh-home': AcnhHome,
+      'my-villagers': MyVillagers,
       'acnh-footer': AcnhFooter,
       'app-link': Link,
     };
@@ -73,7 +75,9 @@ export class AcnhApp extends router(ScopedElementsMixin(LitElement)) {
           route="home"
           class="acnh-home"
         ></acnh-home>
-        <p route="my-villagers" class="my-villagers">My villagers</p>
+        <my-villagers route="my-villagers" class="my-villagers"
+          >My villagers</my-villagers
+        >
         <p route="wishlist" class="wishlist">Wishlist</p>
       </acnh-main>
       <acnh-footer></acnh-footer>
