@@ -1,30 +1,65 @@
-import { createSandbox } from 'sinon';
 import { expect } from '@open-wc/testing';
-
 import { LocalStorageController } from '../local-storage.js';
 
-let sandbox;
-let stub;
+const villagers = [
+  {
+    birthday: '17/3',
+    birthday_string: 'March 17th',
+    gender: 'Female',
+    icon: '/.web-test-runner/assets/img/cheri.png',
+    id: 74,
+    image: '/.web-test-runner/assets/img/cheri.png',
+    nameCN: '樱桃',
+    nameDE: 'Claudia',
+    nameEN: 'Cheri',
+    nameES: 'Cerecita',
+    personality: 'Peppy',
+    species: 'Cub',
+  },
+];
 
-describe('Local Storage', () => {
-  beforeEach(() => {
-    sandbox = createSandbox();
-    stub = {
-      setItem: sandbox.stub(window.localStorage, 'setItem'),
-      getItem: sandbox.stub(window.localStorage, 'getItem'),
-    };
+let fakeStorage = {};
+
+const localStorageMock = {
+  getItem: (key) => {
+    if (key) {
+      return JSON.stringify(villagers);
+    }
+    return undefined;
+  },
+
+  setItem: (key, value) => {
+    fakeStorage[key] = value;
+  },
+};
+
+describe('LocalStorageController', () => {
+  it('should get villagers list with a provided key', async () => {
+    const localStorage = new LocalStorageController(
+      { addController: () => {} },
+      localStorageMock
+    );
+
+    expect(localStorage.get('myVillagers')).to.deep.equal(villagers);
   });
 
-  afterEach(() => {
-    sandbox.restore();
+  it('should get default value if there is no key', async () => {
+    const localStorage = new LocalStorageController(
+      { addController: () => {} },
+      localStorageMock
+    );
+
+    expect(localStorage.get()).to.deep.equal([]);
   });
 
-  // TODO: test mocking localStorage instead of using the function?
-  //   How to test get and set functions when the controller is using an element as a host
-  it('should return default value if there is no data in localStorage', async () => {
-    const myVillagers = [{ nameEN: 'Cheri' }, { nameEN: 'Punchy' }];
+  it('should set a provided value in local Storage key', async () => {
+    const localStorage = new LocalStorageController(
+      { addController: () => {} },
+      localStorageMock
+    );
 
-    stub.setItem('myVillagers', myVillagers);
-    const result = stub.setItem('myVillagers');
+    localStorage.set('myVillagers', villagers);
+
+    expect(fakeStorage.myVillagers).to.deep.equal(JSON.stringify(villagers));
   });
 });

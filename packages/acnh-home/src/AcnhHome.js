@@ -11,8 +11,6 @@ import { LocalStorageController } from '../../controller/test/local-storage.js';
 const LOCALE_KEY = 'acnh-home';
 
 export class AcnhHome extends LocalizeMixin(ScopedElementsMixin(LitElement)) {
-  controller = new LocalStorageController(this);
-
   static get scopedElements() {
     return {
       'villagers-filters': VillagersFilters,
@@ -49,8 +47,9 @@ export class AcnhHome extends LocalizeMixin(ScopedElementsMixin(LitElement)) {
   constructor() {
     super();
 
-    this.__allVillagers = this.controller.get('allVillagers', []);
-    this.villagersToRender = this.controller.get('allVillagers', []);
+    this.controller = new LocalStorageController(this, localStorage);
+    this.__allVillagers = this.controller.get('allVillagers');
+    this.villagersToRender = this.controller.get('allVillagers');
   }
 
   connectedCallback() {
