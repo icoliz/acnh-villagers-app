@@ -52,30 +52,6 @@ describe('MyVillagers', () => {
     const villagersListEl = element.querySelector('my-villagers');
     await waitUntil(() => villagersListEl);
 
-    // const punchyInfo = villagersListEl.shadowRoot.querySelector(
-    //   '[data-testid="villager-info-48"]'
-    // );
-    // const cheriInfo = villagersListEl.shadowRoot.querySelector(
-    //   '[data-testid="villager-info-74"]'
-    // );
-
-    // await waitUntil(() =>
-    //   punchyInfo.shadowRoot.querySelector('[data-testid="villager-img"]')
-    // );
-    // await waitUntil(() =>
-    //   cheriInfo.shadowRoot.querySelector('[data-testid="villager-img"]')
-    // );
-
-    // const punchyImg = punchyInfo.shadowRoot.querySelector(
-    //   '[data-testid="villager-img"]'
-    // );
-    // const cheriImg = cheriInfo.shadowRoot.querySelector(
-    //   '[data-testid="villager-img"]'
-    // );
-
-    // await waitUntil(() => punchyImg);
-    // await waitUntil(() => cheriImg);
-
     await visualDiff(element, 'my-villagers/with-villagers');
   });
 
