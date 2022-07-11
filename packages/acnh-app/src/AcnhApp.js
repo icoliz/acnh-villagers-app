@@ -57,7 +57,7 @@ export class AcnhApp extends router(ScopedElementsMixin(LitElement)) {
 
     this.villagers = [];
     this.filteredVillagers = [];
-    this.wishlistVillagers = [];
+    this.myVillagers = [];
     this.route = '';
   }
 
@@ -75,7 +75,10 @@ export class AcnhApp extends router(ScopedElementsMixin(LitElement)) {
           route="home"
           class="acnh-home"
         ></acnh-home>
-        <my-villagers route="my-villagers" class="my-villagers"
+        <my-villagers
+          route="my-villagers"
+          class="my-villagers"
+          .villagers=${villagers}
           >My villagers</my-villagers
         >
         <p route="wishlist" class="wishlist">Wishlist</p>

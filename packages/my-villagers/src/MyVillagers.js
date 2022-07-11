@@ -39,6 +39,7 @@ export class MyVillagers extends LocalizeMixin(
   static get properties() {
     return {
       currentRoute: { type: String },
+      villagers: { type: Array },
       showWishlistButton: { type: Boolean },
       showMyVillagersButton: { type: Boolean },
     };
@@ -47,6 +48,7 @@ export class MyVillagers extends LocalizeMixin(
   constructor() {
     super();
 
+    this.villagers = [];
     this.showWishlistButton = true;
     this.showMyVillagersButton = true;
   }
@@ -58,6 +60,7 @@ export class MyVillagers extends LocalizeMixin(
       </div>
       <villagers-list
         .currentRoute=${this.currentRoute}
+        .villagers=${this.villagers}
         data-testid="villagers-list"
         .showWishlistButton=${this.showWishlistButton}
         .showMyVillagersButton=${this.showMyVillagersButton}
