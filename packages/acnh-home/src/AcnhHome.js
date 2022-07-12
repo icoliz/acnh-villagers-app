@@ -59,7 +59,7 @@ export class AcnhHome extends LocalizeMixin(ScopedElementsMixin(LitElement)) {
   connectedCallback() {
     super.connectedCallback();
 
-    if (this.controller.get('allVillagers') === undefined) {
+    if (this.controller.get('allVillagers').length === 0) {
       this.setVillagersData();
     }
   }

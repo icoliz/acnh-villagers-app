@@ -46,8 +46,6 @@ export class AcnhApp extends router(ScopedElementsMixin(LitElement)) {
 
   static get properties() {
     return {
-      villagers: { type: Array },
-      filteredVillagers: { type: Array },
       route: { type: String },
     };
   }
@@ -55,9 +53,6 @@ export class AcnhApp extends router(ScopedElementsMixin(LitElement)) {
   constructor() {
     super();
 
-    this.villagers = [];
-    this.filteredVillagers = [];
-    this.myVillagers = [];
     this.route = '';
   }
 
@@ -70,17 +65,13 @@ export class AcnhApp extends router(ScopedElementsMixin(LitElement)) {
       <acnh-header> </acnh-header>
       <acnh-main .activeRoute=${this.route}>
         <acnh-home
-          .villagers=${this.filteredVillagers}
           data-testid="acnh-home"
           route="home"
           class="acnh-home"
           .showWishlistButton=${true}
           .showMyVillagersButton=${true}
         ></acnh-home>
-        <my-villagers
-          route="my-villagers"
-          class="my-villagers"
-          .villagers=${villagers}
+        <my-villagers route="my-villagers" class="my-villagers"
           >My villagers</my-villagers
         >
         <p route="wishlist" class="wishlist">Wishlist</p>
