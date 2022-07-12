@@ -41,6 +41,8 @@ export class AcnhHome extends LocalizeMixin(ScopedElementsMixin(LitElement)) {
   static get properties() {
     return {
       villagersToRender: { type: Array },
+      showWishlistButton: { type: Boolean },
+      showMyVillagersButton: { type: Boolean },
     };
   }
 
@@ -50,6 +52,8 @@ export class AcnhHome extends LocalizeMixin(ScopedElementsMixin(LitElement)) {
     this.controller = new LocalStorageController(this, localStorage);
     this.__allVillagers = this.controller.get('allVillagers');
     this.villagersToRender = this.controller.get('allVillagers');
+    this.showWishlistButton = true;
+    this.showMyVillagersButton = true;
   }
 
   connectedCallback() {
@@ -97,6 +101,8 @@ export class AcnhHome extends LocalizeMixin(ScopedElementsMixin(LitElement)) {
       <villagers-list
         .villagers=${this.villagersToRender}
         data-testid="villagers-list"
+        .showWishlistButton=${this.showWishlistButton}
+        .showMyVillagersButton=${this.showMyVillagersButton}
       ></villagers-list>
     `;
   }
