@@ -72,6 +72,8 @@ export class AcnhApp extends router(ScopedElementsMixin(LitElement)) {
           data-testid="acnh-home"
           route="home"
           class="acnh-home"
+          .showWishlistButton=${true}
+          .showMyVillagersButton=${true}
         ></acnh-home>
         <p route="my-villagers" class="my-villagers">My villagers</p>
         <p route="wishlist" class="wishlist">Wishlist</p>
