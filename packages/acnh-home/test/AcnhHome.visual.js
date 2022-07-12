@@ -1,10 +1,7 @@
+import { html, fixture, waitUntil } from '@open-wc/testing';
 import { visualDiff } from '@web/test-runner-visual-regression';
-import { waitUntil } from '@open-wc/testing';
-import { AcnhHome } from '../index.js';
 
-if (!customElements.get('acnh-home')) {
-  customElements.define('acnh-home', AcnhHome);
-}
+import { AcnhHome } from '../index.js';
 
 const villagers = [
   {
@@ -38,24 +35,44 @@ const villagers = [
 ];
 
 describe('AcnhHome', () => {
-  it('should render home component', async () => {
-    const element = document.createElement('acnh-home');
-    element.villagers = villagers;
-    document.body.appendChild(element);
-    await waitUntil(() => element.villagers);
+  const scopedElements = { 'acnh-home': AcnhHome };
+  const scopedFixture = (template) =>
+    fixture(
+      html`<div style="background-color: #fff; padding: 16px">
+        ${template}
+      </div>`,
+      { scopedElements }
+    );
 
-    const villagersList = element.shadowRoot.querySelector(
+  it('should render home component', async () => {
+    const element = await scopedFixture(
+      html`<acnh-home .villagers=${villagers}></acnh-home>`
+    );
+
+    const acnhHomeEl = element.querySelector('acnh-home');
+
+    const villagersList = acnhHomeEl.shadowRoot.querySelector(
       '[data-testid="villagers-list"]'
     );
+
     villagersList.villagers = villagers;
+
     await waitUntil(() => villagersList.villagers);
 
     const villagerInfo = villagersList.shadowRoot.querySelector(
-      '[data-testid="villager-info"]'
+      '[data-testid="villager-info-48"]'
     );
-    villagerInfo.villagers = villagers;
-    await waitUntil(() => villagersList.villagers);
 
-    await visualDiff(element, 'acnh-home');
+    await waitUntil(() =>
+      villagerInfo.shadowRoot.querySelector('[data-testid="villager-img"]')
+    );
+
+    const villagerImg = villagerInfo.shadowRoot.querySelector(
+      '[data-testid="villager-img"]'
+    );
+
+    await waitUntil(() => villagerImg);
+
+    await visualDiff(element, 'acnh-home/acnh-home');
   });
 });
