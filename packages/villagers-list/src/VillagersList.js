@@ -3,7 +3,7 @@ import { ScopedElementsMixin } from '@open-wc/scoped-elements';
 
 import { VillagerInfo } from '../../villager-info/index.js';
 import { styles } from './VillagersList.styles.js';
-import { LocalStorageController } from '../../controller/localStorage.js';
+import { LocalStorageController } from '../../controller/local-storage.js';
 
 export class VillagersList extends ScopedElementsMixin(LitElement) {
   controller = new LocalStorageController(this);
