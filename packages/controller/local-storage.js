@@ -6,7 +6,7 @@ export class LocalStorageController {
   }
 
   get(key, defaultValue = []) {
-    const localStorageData = this.localStorage.getItem(key);
+    const localStorageData = this.localStorage?.getItem(key);
     if (!localStorageData) {
       return defaultValue;
     }
@@ -16,6 +16,6 @@ export class LocalStorageController {
 
   set(key, value) {
     const localStorageData = JSON.stringify(value);
-    this.localStorage.setItem(key, localStorageData);
+    this.localStorage?.setItem(key, localStorageData);
   }
 }

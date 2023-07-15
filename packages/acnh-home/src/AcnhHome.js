@@ -6,7 +6,7 @@ import { styles } from './AcnhHome.styles.js';
 import { acnhApi } from '../../../services/AcnhApi.js';
 import { VillagersFilters } from '../../villagers-filters/index.js';
 import { VillagersList } from '../../villagers-list/index.js';
-import { LocalStorageController } from '../../controller/test/local-storage.js';
+import { LocalStorageController } from '../../controller/local-storage.js';
 
 const LOCALE_KEY = 'acnh-home';
 
